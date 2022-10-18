@@ -25,12 +25,10 @@ toggleBtn.addEventListener('click', function () {
                                         stroke-linejoin="round" />
                                 </svg>`
     }
+    console.log(navHeight);
 })
 
 searchBtn.addEventListener('click', function () {
     searchBar.style.top = navHeight;
     searchBar.classList.toggle('display-search-bar');
-
-
-
 })
