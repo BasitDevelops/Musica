@@ -270,6 +270,9 @@ nav {
 /* HOME PAGE ENDS HERE  */
 
 @media (max-width: 480px) {
+    .container {
+        min-width: 100vw !importantgit;
+    }
 
     /* NAVBAR STARTS HERE */
     .toggle-btn-container {
@@ -283,6 +286,9 @@ nav {
     }
 
     .search-bar {
+        box-sizing: border-box;
+        margin-top: -0.05rem;
+        /* margin-left:  -0.057rem; */
         min-width: 100%;
         position: absolute;
         left: 0;
@@ -298,13 +304,15 @@ nav {
 
     /* SIDE MENU STARTS HERE */
     .side-menu {
+        box-sizing: border-box;
         min-width: 100%;
         min-height: 100%;
         background-color: #1D2123;
         border-radius: 0;
         position: absolute;
         left: 0;
-        margin: 0;
+        margin-top: -0.05rem;
+        /* padding: 0; */
         display: none;
     }
 
