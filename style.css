@@ -33,9 +33,6 @@ nav {
 }
 
 .toggle-btn-container {
-    display: flex;
-    flex-direction: column;
-    gap: .3rem;
     display: none;
 }
 
@@ -43,25 +40,11 @@ nav {
     min-width: 5%;
 }
 
-.logo-second-part {
-    margin-left: -1rem;
-    margin-bottom: -0.5rem;
-}
-
 .search-bar-container {
     max-width: 95%;
     display: flex;
     align-items: center;
     gap: 1rem;
-}
-
-.search-icon-container {
-    min-width: 10%;
-}
-
-.search-icon-second-part {
-    margin-left: -0.5rem;
-    margin-bottom: -0.1rem;
 }
 
 .search-bar {
@@ -98,24 +81,8 @@ nav {
 
 .home-icon {
     margin-bottom: -15.5px;
-    margin-left: -15.5px;
+    margin-left: -8.5px;
 }
-
-.collection-icon-first-half {
-    margin-bottom: 17.5px;
-    margin-right: -25.7px;
-}
-
-.radio-icon-first-half {
-    margin-bottom: 19.5px;
-    margin-right: -12px;
-}
-
-.profile-icon-first-half {
-    margin-bottom: 13.5px;
-    margin-right: -20.5px;
-}
-
 /* SIDE MENU ENDS HERE  */
 
 /* HOME PAGE STARTS HERE  */
@@ -187,7 +154,9 @@ nav {
     /* z-index: 1; */
 }
 
-.home-page .top-charts {}
+.top-charts {
+    max-height: 25.5rem;
+}
 
 .top-charts h4,
 .new-releases h4 {
@@ -195,6 +164,15 @@ nav {
     font-weight: 700;
     font-size: 24px;
     color: #EFEEE0;
+}
+
+.top-charts .cards-container {
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.top-charts .cards-container::-webkit-scrollbar {
+    display: none;
 }
 
 .top-charts .card {
@@ -242,7 +220,10 @@ nav {
     gap: 1.25rem;
     overflow-x: scroll;
     margin-top: 1rem;
+}
 
+.songs-container::-webkit-scrollbar {
+    display: none;
 }
 
 .songs-container .song {
@@ -269,20 +250,26 @@ nav {
 
 /* HOME PAGE ENDS HERE  */
 
-@media (max-width: 480px) {
-    .container {
-        min-width: 100vw !importantgit;
+@media screen and (max-width: 480px) {
+
+    html,
+    body {
+        margin: 0;
+        min-width: 100%;
+        min-height: 100%;
+        overflow-x: hidden;
+
     }
 
     /* NAVBAR STARTS HERE */
     .toggle-btn-container {
-        display: inherit;
+        display: block;
     }
 
-    .search-icon-container {
-        min-width: 7.5%;
-        position: absolute;
-        right: 0;
+    .search-bar-container {
+        min-width: 75%;
+        display: flex;
+        justify-content: flex-end;
     }
 
     .search-bar {
@@ -386,5 +373,157 @@ nav {
 
     /* HOME PAGE ENDS HERE */
 
+    .current-song {
+        min-width: 100%;
+        position: fixed;
+        bottom: 0;
+        /* background: #D9D9D9;
+        box-shadow: 0px 0px 11px rgba(250, 205, 102, 0.25); */
+        background-color: #1E1E1E;
+        opacity: 0.6;
+        background-blend-mode: screen;
+        display: flex;
+    }
+}
 
+@media screen and (max-width: 960px) and (min-width: 481px) {
+
+    html,
+    body {
+        margin: 0;
+        min-width: 100%;
+        min-height: 100%;
+        overflow-x: hidden;
+
+    }
+
+    /* NAVBAR STARTS HERE */
+    .toggle-btn-container {
+        display: block;
+    }
+
+    .search-bar-container {
+        min-width: 85%;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .search-bar {
+        box-sizing: border-box;
+        margin-top: -0.05rem;
+        /* margin-left:  -0.057rem; */
+        min-width: 100%;
+        position: absolute;
+        left: 0;
+        border-radius: 0;
+        display: none;
+    }
+
+    .display-search-bar {
+        display: inherit;
+    }
+
+    /* NAVBAR ENDS HERE */
+
+    /* SIDE MENU STARTS HERE */
+    .side-menu {
+        box-sizing: border-box;
+        min-width: 100%;
+        min-height: 100%;
+        background-color: #1D2123;
+        border-radius: 0;
+        position: absolute;
+        left: 0;
+        margin-top: -0.05rem;
+        /* padding: 0; */
+        display: none;
+    }
+
+    .side-menu li {
+        list-style: none;
+        margin-top: 2.5rem;
+        margin-left: .5rem;
+    }
+
+    .side-menu a {
+        display: inherit;
+        text-decoration: none;
+        position: absolute;
+        left: 7rem;
+        margin-top: -1.3rem;
+    }
+
+    .display-side-menu {
+        display: inherit;
+    }
+
+    /* SIDE MENU ENDS HERE */
+
+    /* HOME PAGE STARTS HERE */
+    .home-page {
+        margin: 0;
+
+    }
+
+    .home-page .first-cont {
+        display: block;
+    }
+
+    .currated-playlist {
+        max-width: 100%;
+        min-height: 65vh;
+    }
+
+    .currated-playlist .first-container {
+        min-width: 100%;
+
+    }
+
+    /* .currated-playlist .likes {
+    min-width: 100%;
+} */
+
+    .currated-playlist .second-container {
+        display: none;
+    }
+
+    .home-page .top-charts {
+        margin-top: 2.5rem;
+    }
+
+    .top-charts .cards-container {
+        display: flex;
+        gap: 1.15rem;
+        overflow-x: scroll;
+    }
+
+    .top-charts .card {
+        min-width: 77.5vw;
+    }
+
+    .card .first-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    /* HOME PAGE ENDS HERE */
+}
+
+@media screen and (max-width: 1360px) and (min-width: 961px) {
+    .currated-playlist {
+        max-width: 60%;
+    }
+
+    .top-charts {
+        max-width: 40%;
+    }
+
+    .top-charts .card {
+        min-width: 0;
+    }
+
+    .top-charts .card .heart-icon-container {
+        margin-left: 2.5rem;
+    }
 }
