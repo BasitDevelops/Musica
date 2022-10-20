@@ -41,10 +41,10 @@ nav {
 }
 
 .search-bar-container {
-    max-width: 95%;
+    min-width: 95%;
     display: flex;
     align-items: center;
-    gap: 1rem;
+
 }
 
 .search-bar {
@@ -67,6 +67,7 @@ nav {
     position: absolute;
     left: 1rem;
     margin-top: 1rem;
+    z-index: 2;
 }
 
 .side-menu li {
@@ -252,8 +253,6 @@ nav {
     min-width: 100%;
     position: fixed;
     bottom: 0;
-    /* background-color: #1E1E1E;
-    opacity: 0.9; */
     background-color: rgba(29, 33, 35, 0.7);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(15px);
@@ -261,7 +260,8 @@ nav {
     justify-content: space-between;
     align-items: center;
     gap: 2.5rem;
-    padding: 1rem;
+    padding: .3rem;
+    z-index: 2;
 }
 
 .current-song .song-info {
@@ -337,13 +337,16 @@ nav {
 
     /* NAVBAR STARTS HERE */
     .toggle-btn-container {
-        display: block;
+        min-width: 5%;
+        display: inherit;
     }
 
     .search-bar-container {
-        min-width: 75%;
+        box-sizing: border-box;
+        min-width: 90%;
         display: flex;
         justify-content: flex-end;
+        padding-right: 2rem;
     }
 
     .search-bar {
@@ -404,7 +407,7 @@ nav {
     }
 
     .home-page .first-cont {
-        display: block;
+        display: inherit;
     }
 
     .currated-playlist {
@@ -472,13 +475,16 @@ nav {
 
     /* NAVBAR STARTS HERE */
     .toggle-btn-container {
-        display: block;
+        min-width: 5%;
+        display: inherit;
     }
 
     .search-bar-container {
-        min-width: 85%;
+        box-sizing: border-box;
+        min-width: 90%;
         display: flex;
         justify-content: flex-end;
+        padding-right: 2rem;
     }
 
     .search-bar {
@@ -539,7 +545,7 @@ nav {
     }
 
     .home-page .first-cont {
-        display: block;
+        display: inherit;
     }
 
     .currated-playlist {
@@ -548,7 +554,7 @@ nav {
     }
 
     .currated-playlist .first-container {
-        min-width: 37.5%;
+        min-width: 50%;
 
     }
 
@@ -558,6 +564,8 @@ nav {
 
     .currated-playlist .second-container {
         max-width: 50%;
+        display: flex;
+        align-items: center;
     }
 
     .home-page .top-charts {
@@ -591,9 +599,13 @@ nav {
 }
 
 
-@media screen and (max-width: 1360px) and (min-width: 961px) {
+@media screen and (max-width: 1250px) and (min-width: 961px) {
 
     /* HOME PAGE STARTS HERE */
+    .container {
+        min-height: 100vh;
+    }
+
     .currated-playlist {
         min-width: 60%;
     }
@@ -628,4 +640,18 @@ nav {
         min-width: 20rem !important;
     } */
     /* CURRENT SONG ENDS HERE */
+}
+
+@media screen and (min-width: 1251px) {
+    .container {
+        min-height: 100vh;
+    }
+
+    .currated-playlist {
+        min-width: 60%;
+    }
+
+    .top-charts {
+        min-width: 37%;
+    }
 }
