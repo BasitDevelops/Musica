@@ -15,7 +15,7 @@ toggleBtn.addEventListener('click', function () {
         sideMenu.style.top = navHeight;
         sideMenu.classList.add('display-side-menu');
         toggleBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
-        body.style.overflow = 'hidden';
+        body.style.overflowY = 'hidden';
     } else {
         sideMenuFlag = false;
         sideMenu.classList.remove('display-side-menu');
@@ -31,7 +31,7 @@ toggleBtn.addEventListener('click', function () {
         </defs>
         </svg>
         `
-        body.style.overflow = 'scroll';
+        body.style.overflowY = 'scroll';
     }
     console.log(navHeight);
 })
@@ -41,11 +41,11 @@ searchBtn.addEventListener('click', function () {
         searchBarFlag = true;
         searchBar.style.top = navHeight;
         searchBar.classList.add('display-search-bar');
-        body.style.overflow = 'hidden';
+        body.style.overflowY = 'hidden';
     } else {
         searchBarFlag = false;
         searchBar.classList.remove('display-search-bar');
-        body.style.overflow = 'scroll';
+        body.style.overflowY = 'scroll';
         
     }
 })

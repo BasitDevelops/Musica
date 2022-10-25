@@ -21,6 +21,7 @@ body {
     color: #efeee040;
     /* background: rgb(0 100 0 / 0.05) !important; */
     /* outline: 1px solid greenyellow; */
+    text-decoration: none;
 }
 
 /* NAVBAR STARTS HERE */
@@ -94,6 +95,9 @@ nav {
     margin-left: -8.5px;
 }
 
+.active-link {
+
+}
 /* SIDE MENU ENDS HERE  */
 
 /* HOME PAGE STARTS HERE  */
@@ -347,7 +351,7 @@ nav {
 
 .collection-page .links a {
     box-sizing: border-box;
-    border: 1px solid white;
+    border: 1px solid #efeee040;
     border-radius: 1rem;
     padding: .5rem 1.5rem;
 
@@ -389,6 +393,12 @@ nav {
     display: none;
 }
 
+.collection-page .card button {
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    display: none;
+}
+
 /* COLLECTION PAGE ENDS HERE */
 
 /* ALBUM PAGE STARTS HERE */
@@ -408,6 +418,10 @@ nav {
     display: flex;
     gap: 1.3rem;
 }
+
+/* .album-page .first-container .img-container {
+    min-width: 0;
+} */
 
 .album-page .info {
     max-width: 50%;
@@ -472,54 +486,43 @@ nav {
     border-radius: 15px;
     display: flex;
     align-items: center;
-    gap: 1.3rem;
+    gap: 1.25rem;
     padding: .5rem;
 }
 
-.album-page .song div {
+.album-page .song .img-container, .album-page .like-icon-container {
+    max-width: 5%;
+}
+
+.album-page .adjust {
+    min-width: 90%;
     display: flex;
-    justify-content: space-between;
+}
+
+.album-page .adjust div {
+    display: flex;
     align-items: center;
 }
 
-.album-page .song div p {
-    font-size: 12px;
-    color: #FFFFFF;
-}
-
-.adjust {
-    min-width: 90%;
-    display: flex;
-    justify-content: space-between;
-}
-
-.song-info-container {
-    min-width: 60%;
+.album-page .song-info-container {
+    min-width: 70%;
 }
 
 .album-page .other-container {
-    min-width: 29.7%;
+    min-width: 30%;
 }
 
-.song-info-container p, .album-page .other-container p {
+.album-page .song-info-container p {
     min-width: 50%;
     display: flex;
     justify-content: center;
 }
 
-.album-page .other-container div {
+.album-page .other-container p, .album-page .other-container .option-icon-container {
     min-width: 50%;
     display: flex;
     justify-content: flex-end;
 }
-
-
-.album-page .song .img-container, .album-page .song img {
-    max-width: 39px;
-    max-height: 39px;
-    border-radius: 8.5px;
-}
-
 
 /* ALBUM PAGE ENDS HERE */
 
@@ -724,6 +727,10 @@ nav {
         margin-bottom: 1rem;
     }
 
+    .collection-page .card button {
+        display: inherit;
+    }
+
     /* COLLECTION PAGE ENDS HERE */
 
     /* ALBUM PAGE STARTS HERE */
@@ -752,40 +759,32 @@ nav {
         display: inherit;
     }
 
-    .album-page .song .like-icon-container {
+    .album-page .songs-container {
+        padding: 1.5rem .5rem;
+    }
+
+    .album-page .song {
+        gap: 2.5rem;
+    }
+
+    .album-page .like-icon-container {
         display: none;
     }
 
-    .album-page .song div {
+    .album-page .adjust div {
         display: block;
     }
-    
-    .album-page .other-container {
-        min-width: 15%;
-        display: flex !important;
-        flex-direction: column-reverse !important;
-        align-items: flex-end !important;
-        margin-top: .5rem;
-    
-    }
 
-    .song-info-container p {
+    .album-page .song-info-container p {
         justify-content: flex-start;
     }
 
     .album-page .other-container {
-        display: flex;
+        display: flex !important;
+        flex-direction: column-reverse;
     }
 
-    .album-page .other-container p {
-        justify-content: center;
-    }
-
-    .album-page .other-container div {
-        min-width: 50%;
-        display: flex;
-        justify-content: center;
-    }
+    
     /* ALBUM PAGE ENDS HERE */
 
     /* New page */
@@ -989,6 +988,10 @@ nav {
         margin-bottom: 1rem;
     }
 
+    .collection-page .card button {
+        display: inherit;
+    }
+
     /* COLLECTION PAGE ENDS HERE */
 
     /* ALBUM PAGE STARTS HERE */
@@ -1017,40 +1020,32 @@ nav {
         display: inherit;
     }
 
-    .album-page .song .like-icon-container {
-        /* display: none; */
+    .album-page .songs-container {
+        padding: 1.5rem .5rem;
     }
 
-    .album-page .song div {
+    .album-page .song {
+        gap: 2.5rem;
+    }
+
+    .album-page .like-icon-container {
+        display: none;
+    }
+
+    .album-page .adjust div {
         display: block;
     }
-    
-    .album-page .other-container {
-        min-width: 0%;
-        display: flex !important;
-        flex-direction: column-reverse !important;
-        align-items: flex-end !important;
-        margin-top: .5rem;
-    
-    }
 
-    .song-info-container p {
+    .album-page .song-info-container p {
         justify-content: flex-start;
     }
 
     .album-page .other-container {
-        display: flex;
+        display: flex !important;
+        flex-direction: column-reverse;
     }
 
-    .album-page .other-container p {
-        justify-content: center;
-    }
-
-    .album-page .other-container div {
-        min-width: 50%;
-        display: flex;
-        justify-content: center;
-    }
+    
     /* ALBUM PAGE ENDS HERE */
 }
 
