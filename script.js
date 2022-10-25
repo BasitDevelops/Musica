@@ -46,6 +46,79 @@ searchBtn.addEventListener('click', function () {
         searchBarFlag = false;
         searchBar.classList.remove('display-search-bar');
         body.style.overflowY = 'scroll';
-        
+
     }
 })
+
+
+
+async function fetchApi() {
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '53b6f38843msh9380b7f1e5cfa2bp1121dbjsn98d5b38c6203',
+            'X-RapidAPI-Host': 'shazam.p.rapidapi.com'
+        }
+    };
+
+    const response = await fetch('https://shazam.p.rapidapi.com/charts/track?locale=en-US&pageSize=20&startFrom=0', options);
+    const data = await response.json();
+    const tracks = data.tracks;
+    // console.log(tracks);
+    const topCharts = document.getElementById('top-charts');
+
+    tracks.forEach(track => {
+        console.log(track);
+        let trackUrl = track.url;
+        let trackCoverArt = track.images.coverart;
+        let trackName = track.title;
+        let trackArtist = track.subtitle;
+        console.log(trackUrl);
+
+        topCharts.innerHTML += `<div class="card" id="top-charts-card">
+        <div class="first-container">
+            <div class="img-container">
+                <img src="${trackCoverArt}" alt="">
+            </div>
+            <div class="card-info">
+                <p class="card-title">
+                    ${trackName}
+                </p>
+                <p class="artist">
+                    ${trackArtist}
+                </p>
+                <p class="card-duration">
+                    ???
+                </p>
+            </div>
+        </div>
+        <div class="heart-icon-container">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M2.15388 8.69874C1.34913 6.18624 2.28963 3.31449 4.92738 2.46474C6.31488 2.01699 7.84638 2.28099 8.99988 3.14874C10.0911 2.30499 11.6789 2.01999 13.0649 2.46474C15.7026 3.31449 16.6491 6.18624 15.8451 8.69874C14.5926 12.6812 8.99988 15.7487 8.99988 15.7487C8.99988 15.7487 3.44838 12.7277 2.15388 8.69874Z"
+                    stroke="#FACD66" stroke-width="0.5625" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <path opacity="0.4" d="M12 5.02501C12.8025 5.28451 13.3695 6.00076 13.4377 6.84151"
+                    stroke="#FACD66" stroke-width="0.5625" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </div>
+    </div>`
+
+        let topChartsCards = document.querySelectorAll('#top-charts-card');
+
+        topChartsCards.forEach(function (card) {
+            card.addEventListener('click', function (e) {
+                console.log(e.currentTarget);
+                console.log(trackUrl);
+            })
+        })
+    });
+
+}
+fetchApi();
+
+
+
+

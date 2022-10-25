@@ -203,7 +203,10 @@ nav {
     gap: 1rem;
 }
 
-.card img {}
+.card img {
+    max-width: 5rem;
+    border-radius: .5rem;
+}
 
 .card .card-title {
     margin: 0;
