@@ -8,7 +8,8 @@
     <title>Musica</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/fontawesome.min.css">
-    <script src="script.js" defer></script>
+    <!-- <script src="script.js" defer></script> -->
+    <script src="script2.js" defer></script>
 </head>
 
 <body>
@@ -300,95 +301,8 @@
             <div class="second-container">
                 <section class="new-releases">
                     <h4>New releases.</h4>
-                    <div class="songs-container">
-                        <div class="song">
-                            <img src="./images/Rectangle 14.svg" alt="">
-                            <div class="song-info">
-                                <p class="song-title">
-                                    Life in a bubble
-                                </p>
-                                <p class="artist">
-                                    Dj YK mule
-                                </p>
-                            </div>
-                        </div>
-                        <div class="song">
-                            <img src="./images/Rectangle 14.svg" alt="">
-                            <div class="song-info">
-                                <p class="song-title">
-                                    Life in a bubble
-                                </p>
-                                <p class="artist">
-                                    Dj YK mule
-                                </p>
-                            </div>
-                        </div>
-                        <div class="song">
-                            <img src="./images/Rectangle 14.svg" alt="">
-                            <div class="song-info">
-                                <p class="song-title">
-                                    Life in a bubble
-                                </p>
-                                <p class="artist">
-                                    Dj YK mule
-                                </p>
-                            </div>
-                        </div>
-                        <div class="song">
-                            <img src="./images/Rectangle 14.svg" alt="">
-                            <div class="song-info">
-                                <p class="song-title">
-                                    Life in a bubble
-                                </p>
-                                <p class="artist">
-                                    Dj YK mule
-                                </p>
-                            </div>
-                        </div>
-                        <div class="song">
-                            <img src="./images/Rectangle 14.svg" alt="">
-                            <div class="song-info">
-                                <p class="song-title">
-                                    Life in a bubble
-                                </p>
-                                <p class="artist">
-                                    Dj YK mule
-                                </p>
-                            </div>
-                        </div>
-                        <div class="song">
-                            <img src="./images/Rectangle 14.svg" alt="">
-                            <div class="song-info">
-                                <p class="song-title">
-                                    Life in a bubble
-                                </p>
-                                <p class="artist">
-                                    Dj YK mule
-                                </p>
-                            </div>
-                        </div>
-                        <div class="song">
-                            <img src="./images/Rectangle 14.svg" alt="">
-                            <div class="song-info">
-                                <p class="song-title">
-                                    Life in a bubble
-                                </p>
-                                <p class="artist">
-                                    Dj YK mule
-                                </p>
-                            </div>
-                        </div>
-                        <div class="song">
-                            <img src="./images/Rectangle 14.svg" alt="">
-                            <div class="song-info">
-                                <p class="song-title">
-                                    Life in a bubble
-                                </p>
-                                <p class="artist">
-                                    Dj YK mule
-                                </p>
-                            </div>
-                        </div>
+                    <div class="songs-container" id="new-releases">
+                        
                     </div>
                 </section>
             </div>
@@ -396,7 +310,7 @@
         <!-- HOME PAGE ENDS HERE -->
 
     </div>
-    <section class="current-song">
+    <section class="current-song" id="current-song">
         <div class="song-info">
             <div class="img-container">
                 <img src="./images/Rectangle 15.svg" alt="">
@@ -405,6 +319,7 @@
                 <p class="song-name">Seasons in</p>
                 <p class="artist">James</p>
             </div>
+            <audio src=""></audio>
         </div>
         <div class="controls">
             <div class="control-btns">
@@ -483,9 +398,7 @@
                 </button>
             </div>
             <div class="duration-bar">
-                <svg width="749" height="4" viewBox="0 0 749 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="749" height="4" rx="2" fill="white" fill-opacity="0.04" />
-                </svg>
+                <input type="range" name="range" id="duration-bar" min="0" max="100">
 
             </div>
         </div>

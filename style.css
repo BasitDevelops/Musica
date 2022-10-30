@@ -116,7 +116,7 @@ nav {
     max-width: 47rem;
     max-height: 25.5rem;
     background: #609EAF;
-    border-radius: 40px;
+    border-radius: 1rem;
     padding: 1.5rem 2rem;
     display: flex;
 }
@@ -209,19 +209,21 @@ nav {
 }
 
 .card .card-title {
-    margin: 0;
+    margin-top: 0;
     color: #FFFFFF;
     font-size: 17px;
 }
 
 .card .artist {
+    margin-top: -0.5rem;
     color: #ffffff80;
     font-size: 12px;
 }
 
 .card .card-duration {
+    margin-top: 2rem;
     color: #FFFFFF;
-    font-size: 12px;
+    font-size: 10px;
 }
 
 .new-releases {
@@ -245,17 +247,19 @@ nav {
 
 .song img {
     max-width: 153px;
+    border-radius: 1rem;
 }
 
 .song .song-title {
-    margin: 0;
+    /* margin: 0; */
+    margin-top: .5rem;
     color: #FFFFFF;
     font-size: 12px;
     text-align: center;
 }
 
 .song .artist {
-    margin: 0;
+    margin-top: -0.5rem;
     color: #ffffff80;
     font-size: 10px;
     text-align: center;
@@ -278,6 +282,11 @@ nav {
     gap: 2.5rem;
     padding: .3rem;
     z-index: 2;
+    display: none;
+}
+
+.display-current-song {
+    display: flex;
 }
 
 .current-song .song-info {
@@ -286,14 +295,15 @@ nav {
     gap: .5rem;
 }
 
-.current-song .images-container {
-    max-width: 60px;
-    max-height: 60px;
-}
+/* .current-song .images-container {
+    max-width: 30px;
+    max-height: 30px;
+} */
 
 .current-song img {
-    min-width: 100%;
-    min-height: 100%;
+    max-width: 60px;
+    border-radius: .5rem;
+    /* max-height: 60px; */
 }
 
 .current-song p {
@@ -645,7 +655,7 @@ nav {
 
     .top-charts .cards-container {
         display: flex;
-        gap: 1.15rem;
+        gap: 1.25rem;
         overflow-x: scroll;
     }
 
@@ -910,7 +920,7 @@ nav {
 
     .top-charts .cards-container {
         display: flex;
-        gap: 1.15rem;
+        gap: 1.25rem;
         overflow-x: scroll;
     }
 
