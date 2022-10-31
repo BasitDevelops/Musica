@@ -13,19 +13,18 @@ body {
 
 @font-face {
     font-family: quicksand;
-    src: url(quicksand/Quicksand_Bold.otf);
+    src: url(./fonts/Quicksand_Bold.otf);
 }
 
 * {
     font-family: quicksand;
     color: #efeee040;
-    /* background: rgb(0 100 0 / 0.05) !important; */
     /* outline: 1px solid greenyellow; */
     text-decoration: none;
 }
 
 /* NAVBAR STARTS HERE */
-nav {
+nav {   
     box-sizing: border-box;
     padding: 1rem 0;
     display: flex;
@@ -91,8 +90,8 @@ nav {
 }
 
 .home-icon {
-    margin-bottom: -7.5px;
-    margin-left: -8.5px;
+    margin-bottom: -0.469rem;
+    margin-left: -0.531rem;
 }
 
 .active-link {
@@ -130,13 +129,13 @@ nav {
 
 .currated-playlist p {
     color: #FFFFFF;
-    font-size: 12px;
+    font-size: 0.75rem;
 }
 
 .currated-playlist h3 {
     color: #FFFFFF;
     font-weight: 700;
-    font-size: 35px;
+    font-size: 2.188rem;
     margin: -0.5rem 0;
 }
 
@@ -152,6 +151,7 @@ nav {
 
 .images-container img {
     margin-left: -1.25rem;
+    border-radius: 100%;
 }
 
 .currated-playlist .design-container {
@@ -172,7 +172,7 @@ nav {
 .new-releases h4 {
     margin: 0;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 1.5rem;
     color: #EFEEE0;
 }
 
@@ -188,19 +188,25 @@ nav {
 .top-charts .card {
     box-sizing: border-box;
     min-width: 26rem;
-    /* max-height: 6rem; */
     background-color: #1A1E1F;
     border-radius: 1rem;
     display: flex;
-    justify-content: space-between;
     padding: 1rem;
     margin-top: 1rem;
 }
 
 .card .first-container {
+    min-width: 90%;
     box-sizing: border-box;
     display: flex;
     gap: 1rem;
+}
+
+.card .heart-icon-container {
+    min-width: 10%;
+    max-height: 1rem;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .card img {
@@ -217,13 +223,13 @@ nav {
 .card .artist {
     margin-top: -0.5rem;
     color: #ffffff80;
-    font-size: 12px;
+    font-size: 0.75rem;
 }
 
 .card .card-duration {
     margin-top: 2rem;
     color: #FFFFFF;
-    font-size: 10px;
+    font-size: 0.625rem;
 }
 
 .new-releases {
@@ -242,11 +248,11 @@ nav {
 }
 
 .songs-container .song {
-    max-width: 153px;
+    max-width: 9.563rem;
 }
 
 .song img {
-    max-width: 153px;
+    max-width: 9.563rem;
     border-radius: 1rem;
 }
 
@@ -254,14 +260,14 @@ nav {
     /* margin: 0; */
     margin-top: .5rem;
     color: #FFFFFF;
-    font-size: 12px;
+    font-size: 0.75rem;
     text-align: center;
 }
 
 .song .artist {
     margin-top: -0.5rem;
     color: #ffffff80;
-    font-size: 10px;
+    font-size: 0.625em;
     text-align: center;
 }
 
@@ -277,10 +283,8 @@ nav {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(15px);
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: 2.5rem;
-    padding: .3rem;
+    padding: 1.5rem;
     z-index: 2;
     display: none;
 }
@@ -290,20 +294,15 @@ nav {
 }
 
 .current-song .song-info {
+    min-width: 20%;
     display: flex;
     align-items: center;
     gap: .5rem;
 }
 
-/* .current-song .images-container {
-    max-width: 30px;
-    max-height: 30px;
-} */
-
 .current-song img {
-    max-width: 60px;
+    max-width: 3.75rem;
     border-radius: .5rem;
-    /* max-height: 60px; */
 }
 
 .current-song p {
@@ -311,16 +310,17 @@ nav {
 }
 
 .controls {
+    min-width: 60%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
 }
 
 .controls .control-btns {
     display: flex;
     align-items: center;
-    gap: 1rem;
-
+    gap: 1.5rem;
 }
 
 .controls button {
@@ -328,17 +328,20 @@ nav {
     border: none;
 }
 
-.playandpause-btn {
-    box-sizing: border-box;
-    margin: 0 -1rem;
+.duration-bar {
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
-.duration-bar {
-    margin: 0;
+.duration-bar input[type="range"] {
+    min-width: 85%;
 }
 
 .volume {
+    min-width: 20%;
     display: flex;
+    justify-content: flex-end;
     gap: .5rem;
 }
 
@@ -377,12 +380,12 @@ nav {
 }
 
 .collection-page .card {
-    min-width: 200px;
-    min-height: 200px;
-    background-image: url(./images/Rectangle\ 26.svg);
+    min-width: 12.5rem;
+    min-height: 12.5rem;
+    background-image: url(./images/Rectangle\ 26.jpg);
+    border-radius: 1rem;
     background-repeat: no-repeat;
     background-size: contain;
-
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -416,7 +419,7 @@ nav {
 
 /* ALBUM PAGE STARTS HERE */
 .album-page-background {
-    background-image: linear-gradient(to bottom, rgba(16, 153, 255, 0.7), rgba(255, 252, 179, 0.7)), url(./images/Lead-image.svg);
+    background-image: linear-gradient(to bottom, rgba(16, 153, 255, 0.7), rgba(255, 252, 179, 0.7)), url(./images/Lead-image.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-blend-mode: soft-light;
@@ -432,9 +435,9 @@ nav {
     gap: 1.3rem;
 }
 
-/* .album-page .first-container .img-container {
-    min-width: 0;
-} */
+.album-page .first-container .img-container img{
+   border-radius: 1rem;
+}
 
 .album-page .info {
     max-width: 50%;
@@ -446,18 +449,14 @@ nav {
 .album-page .info h3 {
     margin: 0;
     font-weight: 700;
-    font-size: 35px;
+    font-size: 2.188rem;
     color: #A4C7C6;
 }
 
 .album-page .info p {
     font-weight: 400;
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #EFEEE0;
-}
-
-.album-page .info .songs-count {
-    /* margin-top: 0; */
 }
 
 .album-page .btns-container {
@@ -680,6 +679,15 @@ nav {
         display: none;
     }
 
+    .current-song .song-info {
+        min-width: 50%;
+    }
+
+    .controls {
+        min-width: 50%;
+        align-items: flex-end;
+    }
+
     /* CURRENT SONG ENDS HERE */
 
     /* COLLECTION PAGE STARTS HERE */
@@ -710,9 +718,9 @@ nav {
 
     .collection-page .card {
         min-height: 17.5rem;
-        background-image: url(./images/Rectangle\ 26.svg);
+        background-image: url(./images/Rectangle\ 26.jpg);
         background-size: cover;
-        border-radius: 3rem;
+        border-radius: 1rem;
         margin-bottom: 1.5rem;
 
     }
@@ -755,7 +763,7 @@ nav {
         display: block;
     }
 
-    .album-page .first-container .img-container, .album-page .first-container img {
+    .album-page .first-container .img-container, .album-page .first-container .img-container img {
         min-width: 100%;
     }
 
@@ -941,6 +949,15 @@ nav {
         display: none;
     }
 
+    .current-song .song-info {
+        min-width: 50%;
+    }
+
+    .controls {
+        min-width: 50%;
+        align-items: flex-end;
+    }
+
     /* CURRENT SONG ENDS HERE */
 
     /* COLLECTION PAGE STARTS HERE */
@@ -971,9 +988,9 @@ nav {
 
     .collection-page .card {
         min-height: 17.5rem;
-        background-image: url(./images/Rectangle\ 26.svg);
+        background-image: url(./images/Rectangle\ 26.jpg);
         background-size: cover;
-        border-radius: 3rem;
+        border-radius: 1rem;
         margin-bottom: 1.5rem;
 
     }
@@ -1086,10 +1103,6 @@ nav {
         min-width: 0;
     }
 
-    .top-charts .card .heart-icon-container {
-        margin-left: 2.5rem;
-    }
-
     /* HOME PAGE ENDS HERE */
 
 
@@ -1099,10 +1112,6 @@ nav {
         max-width: 35rem;
 
     }
-
-    /* .duration-bar svg {
-        min-width: 20rem !important;
-    } */
     /* CURRENT SONG ENDS HERE */
 }
 
