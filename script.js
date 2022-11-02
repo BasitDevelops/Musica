@@ -9,16 +9,6 @@ let searchBarFlag = false;
 let navHeight = `${navBar.getBoundingClientRect().height}px`
 const body = document.body;
 
-// body.addEventListener('scroll', function () {
-//     // let scrollValue = `${body.offsetHeight}px`;
-
-//     // if (scrollValue >= navHeight) {
-//     //     navBar.style.position = '';
-//     //     console.log();
-//     // }
-//     console.log(window.pageYOffset);
-// })
-
 toggleBtn.addEventListener('click', function () {
     if (!sideMenuFlag) {
         sideMenuFlag = true;
@@ -46,6 +36,27 @@ searchBtn.addEventListener('click', function () {
         body.style.overflowY = 'scroll';
     }
 })
+//
+
+//
+
+//
+if (window.location.href == 'http://127.0.0.1:5500/index.html' || window.location.href == 'https://basitdevelops.github.io/Musica/index.html' || window.location.href == 'https://basitdevelops.github.io/Musica/') {
+    let homeLinkIcon = sideMenu.children[0].children[0].children[0].children[0];
+    let homeLinkText = sideMenu.children[0].children[0].children[0].children[1];
+    homeLinkIcon.classList.add('active-link-icon')
+    homeLinkText.classList.add('active-link-text')
+} else if (window.location.href == 'http://127.0.0.1:5500/collection.html' || window.location.href == 'https://basitdevelops.github.io/Musica/collection.html') {
+    let collectionLinkIcon = sideMenu.children[0].children[1].children[0].children[0];
+    let collectionLinkText = sideMenu.children[0].children[1].children[0].children[1];
+    collectionLinkIcon.classList.add('active-link-icon')
+    collectionLinkText.classList.add('active-link-text')
+} else if (window.location.href == 'http://127.0.0.1:5500/album.html' || window.location.href == 'https://basitdevelops.github.io/Musica/album.html') {
+    let albumLinkIcon = sideMenu.children[0].children[2].children[0].children[0];
+    let albumLinkText = sideMenu.children[0].children[2].children[0].children[1];
+    albumLinkIcon.classList.add('active-link-icon')
+    albumLinkText.classList.add('active-link-text')
+}
 
 //
 
@@ -138,7 +149,6 @@ topChartsCards.forEach(function (card) {
         let cardDuration = document.querySelector('.card-duration');
         let audioDuration = (audio.duration / 60).toFixed(2);
         cardDuration.innerHTML = audioDuration;
-        // console.log(cardDuration);
         //FIX
     })
 
@@ -169,22 +179,26 @@ topChartsCards.forEach(function (card) {
         currentSongArtist.textContent = cardArtist;
         currentSongAudio.src = audio.src;
 
-        playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl"></i>';
+        playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>';
     })
 })
+//
+
+//
+
+//
 
 let likeIcons = document.querySelectorAll('.heart-icon');
 
-let likeIconFlag = false;
-
 likeIcons.forEach(function (likeIcon) {
-    likeIcon.addEventListener('click', function (e) {
+    let likeIconFlag = false;
+    likeIcon.addEventListener('click', function () {
         let myCollectionBg = likeIcon.parentElement.previousElementSibling.children[0].children[0].src;
         let myCollectionName = likeIcon.parentElement.previousElementSibling.children[1].children[0].textContent;
         let myCollectionArtist = likeIcon.parentElement.previousElementSibling.children[1].children[1].textContent;
-        
+
         let myCollectionInfo = {
-            backgroundImg : myCollectionBg,
+            backgroundImg: myCollectionBg,
             name: myCollectionName,
             artist: myCollectionArtist
         }
@@ -193,22 +207,19 @@ likeIcons.forEach(function (likeIcon) {
             likeIcon.style.color = 'red';
             myCollection.push(myCollectionInfo);
             likeIconFlag = true;
-        } 
-        else {
+        } else {
             likeIcon.style.color = '#efeee040';
+            myCollection.splice(myCollectionInfo, 1);
             likeIconFlag = false;
-            console.log(likeIconFlag);
         }
-
-        console.log(myCollection);
     })
 })
 
 const myCollection = [];
 
-myCollection.forEach(function (card) {
+// const myCollectionContainer = document.querySelector('#my-collection');
 
-})
+// console.log(myCollectionContainer);
 
 //
 
@@ -302,7 +313,7 @@ newReleasesSongs.forEach(function (song) {
         currentSongArtist.textContent = songArtist;
         currentSongAudio.src = audio.src;
 
-        playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl"></i>';
+        playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>';
     })
 })
 
@@ -316,7 +327,7 @@ let currentSongAudio = currentSongBar.children[0].children[2];
 playOrPauseBtn.addEventListener('click', function () {
     if (currentSongAudio.paused) {
         currentSongAudio.play();
-        playOrPauseBtn.innerHTML = `<i class="fa-solid fa-circle-pause fa-2xl"></i>`
+        playOrPauseBtn.innerHTML = `<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>`
     } else {
         currentSongAudio.pause();
         playOrPauseBtn.innerHTML = `<i class="fa-solid fa-circle-play fa-2xl"></i>`
@@ -362,7 +373,7 @@ nextBtn.addEventListener('click', function () {
             songIndex = -1;
         }
     }
-    playOrPauseBtn.innerHTML = `<i class="fa-solid fa-circle-pause fa-2xl"></i>`
+    playOrPauseBtn.innerHTML = `<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>`
     //FIX
 })
 
@@ -404,5 +415,22 @@ prevBtn.addEventListener('click', function () {
         currentSongAudio.src = prevAudio.src;
     }
     //FIX
+})
+//
+
+//
+
+//
+
+const progressBar = currentSongBar.querySelector('.progress-bar').children[0];
+
+currentSongAudio.addEventListener('timeupdate', function () {
+    progress = parseInt((currentSongAudio.currentTime / currentSongAudio.duration) * 100);
+    progressBar.value = progress;
+})
+
+progressBar.addEventListener('change', function () {
+    console.log(currentSongAudio);
+    currentSongAudio.currentTime = progressBar.value * currentSongAudio.duration / 100;
 })
 

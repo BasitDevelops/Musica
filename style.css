@@ -9,6 +9,7 @@ body {
     box-sizing: border-box;
     background: #1e2224;
     padding: 0 1rem;
+    overflow-x: hidden;
 }
 
 @font-face {
@@ -24,7 +25,7 @@ body {
 }
 
 /* NAVBAR STARTS HERE */
-nav {   
+nav {
     box-sizing: border-box;
     padding: 1rem 0;
     display: flex;
@@ -89,14 +90,19 @@ nav {
     display: none;
 }
 
-.home-icon {
-    margin-bottom: -0.469rem;
-    margin-left: -0.531rem;
-}
-
 .active-link {
-
+    background-color: #FACD66;
+    color: #1D2123;
 }
+
+.active-link-icon {
+    border-bottom: 3px solid #FACD66;
+}
+
+.active-link-text {
+    color: #FFFFFF;
+}
+
 /* SIDE MENU ENDS HERE  */
 
 /* HOME PAGE STARTS HERE  */
@@ -151,7 +157,6 @@ nav {
 
 .images-container img {
     margin-left: -1.25rem;
-    border-radius: 100%;
 }
 
 .currated-playlist .design-container {
@@ -204,9 +209,12 @@ nav {
 
 .card .heart-icon-container {
     min-width: 10%;
-    max-height: 1rem;
+    max-height: 2rem;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #efeee040;
+    border-radius: 50%;
 }
 
 .card img {
@@ -251,13 +259,12 @@ nav {
     max-width: 9.563rem;
 }
 
-.song img {
+.home-page .song img {
     max-width: 9.563rem;
     border-radius: 1rem;
 }
 
 .song .song-title {
-    /* margin: 0; */
     margin-top: .5rem;
     color: #FFFFFF;
     font-size: 0.75rem;
@@ -284,7 +291,7 @@ nav {
     backdrop-filter: blur(15px);
     display: flex;
     align-items: center;
-    padding: 1.5rem;
+    padding: 1rem;
     z-index: 2;
     display: none;
 }
@@ -320,7 +327,7 @@ nav {
 .controls .control-btns {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
 .controls button {
@@ -328,13 +335,21 @@ nav {
     border: none;
 }
 
-.duration-bar {
+.controls button i {
+    color: #FFFFFF;
+}
+
+.controls .playorpause-btn i {
+    color: #FACD66;
+}
+
+.progress-bar {
     min-width: 100%;
     display: flex;
     justify-content: center;
 }
 
-.duration-bar input[type="range"] {
+.progress-bar input[type="range"] {
     min-width: 85%;
 }
 
@@ -355,6 +370,7 @@ nav {
 /* COLLECTION PAGE STARTS HERE */
 .collection-page {
     min-width: 100%;
+    min-height: 100vh;
     margin-top: 1rem;
     margin-left: 4.5rem;
 }
@@ -376,20 +392,26 @@ nav {
 .collection-page .cards-container {
     margin-top: 1.5rem;
     display: flex;
-
 }
 
 .collection-page .card {
     min-width: 12.5rem;
     min-height: 12.5rem;
-    background-image: url(./images/Rectangle\ 26.jpg);
+    background-image: url(./images/Rectangle\ 26.png);
     border-radius: 1rem;
     background-repeat: no-repeat;
     background-size: contain;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+}
 
+.card-bg-2 {
+    background-image: url(./images/Rectangle\ 27.png) !important;
+}
+
+.card-bg-3 {
+    background-image: url(./images/Rectangle\ 28.png) !important;
 }
 
 .collection-page .card-title {
@@ -399,7 +421,7 @@ nav {
 }
 
 .collection-page .artist {
-    margin-top: 0;
+    margin-top: -1rem;
     position: relative;
     left: 1rem;
 
@@ -419,10 +441,12 @@ nav {
 
 /* ALBUM PAGE STARTS HERE */
 .album-page-background {
-    background-image: linear-gradient(to bottom, rgba(16, 153, 255, 0.7), rgba(255, 252, 179, 0.7)), url(./images/Lead-image.jpg);
+    box-sizing: border-box;
+    background-image: linear-gradient(to bottom, rgba(16, 153, 255, 0.7), rgba(255, 252, 179, 0.7)), url(./images/Lead-image.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-blend-mode: soft-light;
+    padding-bottom: 1rem;
 }
 
 .album-page {
@@ -483,7 +507,7 @@ nav {
 .album-page .songs-container {
     box-sizing: border-box;
     background-color: #1D2123;
-    border-radius: 2.5rem;
+    border-radius: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -502,7 +526,8 @@ nav {
     padding: .5rem;
 }
 
-.album-page .song .img-container, .album-page .like-icon-container {
+.album-page .song .img-container,
+.album-page .like-icon-container {
     max-width: 5%;
 }
 
@@ -528,12 +553,23 @@ nav {
     min-width: 50%;
     display: flex;
     justify-content: center;
+    color: #FFFFFF;
 }
 
-.album-page .other-container p, .album-page .other-container .option-icon-container {
+.album-page .song-info-container .song-name-and-artist {
+    justify-content: flex-start;
+}
+
+.album-page .other-container p,
+.album-page .other-container .option-icon-container {
     min-width: 50%;
     display: flex;
     justify-content: flex-end;
+    color: #FFFFFF;
+}
+
+.album-page .option-icon-container i {
+    color: #FACD66;
 }
 
 /* ALBUM PAGE ENDS HERE */
@@ -551,6 +587,7 @@ nav {
     }
 
     /* NAVBAR STARTS HERE */
+
     .toggle-btn-container {
         min-width: 5%;
         display: inherit;
@@ -566,8 +603,8 @@ nav {
 
     .search-bar {
         box-sizing: border-box;
-        margin-top: -0.05rem;
-        /* margin-left:  -0.057rem; */
+        margin-top: -0.25rem;
+        margin-left:  -0.05rem;
         min-width: 100%;
         position: absolute;
         left: 0;
@@ -585,12 +622,12 @@ nav {
     .side-menu {
         box-sizing: border-box;
         min-width: 100%;
-        min-height: 100%;
         background-color: #1D2123;
         border-radius: 0;
         position: absolute;
         left: 0;
-        margin-top: -0.05rem;
+        margin-top: -0.25rem;
+        padding-bottom: 2.5rem;
         display: none;
     }
 
@@ -674,17 +711,17 @@ nav {
     .shuffle-btn,
     .prev-btn,
     .repeat-btn,
-    .duration-bar,
+    .progress-bar,
     .volume {
         display: none;
     }
 
     .current-song .song-info {
-        min-width: 50%;
+        min-width: 80%;
     }
 
     .controls {
-        min-width: 50%;
+        min-width: 20%;
         align-items: flex-end;
     }
 
@@ -718,7 +755,6 @@ nav {
 
     .collection-page .card {
         min-height: 17.5rem;
-        background-image: url(./images/Rectangle\ 26.jpg);
         background-size: cover;
         border-radius: 1rem;
         margin-bottom: 1.5rem;
@@ -728,16 +764,16 @@ nav {
     .collection-page .card-title {
         position: relative;
         left: 1rem;
-        top: -2.5rem;
-
+        font-size: 24px;
+        color: #EFEEE0;
     }
 
     .collection-page .artist {
         margin-top: 0;
         position: relative;
         left: 1rem;
-        top: -2.5rem;
-
+        top: -1.5rem;
+        font-size: 10px;
     }
 
     .collection-page .other {
@@ -746,6 +782,11 @@ nav {
         justify-content: space-between;
         padding: 0 1rem;
         margin-bottom: 1rem;
+    }
+
+    .collection-page .other p {
+        font-size: 14px;
+        color: #FFFFFF;
     }
 
     .collection-page .card button {
@@ -763,13 +804,14 @@ nav {
         display: block;
     }
 
-    .album-page .first-container .img-container, .album-page .first-container .img-container img {
+    .album-page .first-container .img-container,
+    .album-page .first-container .img-container img {
         min-width: 100%;
     }
 
     .album-page .info {
         min-width: 100%;
-        margin-top: 1rem;    
+        margin-top: 1rem;
     }
 
     .album-page .btns-container {
@@ -805,7 +847,7 @@ nav {
         flex-direction: column-reverse;
     }
 
-    
+
     /* ALBUM PAGE ENDS HERE */
 
     /* New page */
@@ -838,8 +880,8 @@ nav {
 
     .search-bar {
         box-sizing: border-box;
-        margin-top: -0.05rem;
-        /* margin-left:  -0.057rem; */
+        margin-top: -0.25rem;
+        margin-left:  -0.05rem;
         min-width: 100%;
         position: absolute;
         left: 0;
@@ -857,13 +899,13 @@ nav {
     .side-menu {
         box-sizing: border-box;
         min-width: 100%;
-        min-height: 100%;
         background-color: #1D2123;
         border-radius: 0;
         position: absolute;
         left: 0;
-        margin-top: -0.05rem;
+        margin-top: -0.25rem;
         display: none;
+        padding-bottom: 2.5rem;
     }
 
     .side-menu li {
@@ -944,17 +986,17 @@ nav {
     .shuffle-btn,
     .prev-btn,
     .repeat-btn,
-    .duration-bar,
+    .progress-bar,
     .volume {
         display: none;
     }
 
     .current-song .song-info {
-        min-width: 50%;
+        min-width: 80%;
     }
 
     .controls {
-        min-width: 50%;
+        min-width: 20%;
         align-items: flex-end;
     }
 
@@ -988,7 +1030,6 @@ nav {
 
     .collection-page .card {
         min-height: 17.5rem;
-        background-image: url(./images/Rectangle\ 26.jpg);
         background-size: cover;
         border-radius: 1rem;
         margin-bottom: 1.5rem;
@@ -998,16 +1039,16 @@ nav {
     .collection-page .card-title {
         position: relative;
         left: 1rem;
-        top: -2.5rem;
-
+        font-size: 24px;
+        color: #EFEEE0;
     }
 
     .collection-page .artist {
         margin-top: 0;
         position: relative;
         left: 1rem;
-        top: -2.5rem;
-
+        top: -1.5rem;
+        font-size: 10px;
     }
 
     .collection-page .other {
@@ -1016,6 +1057,11 @@ nav {
         justify-content: space-between;
         padding: 0 1rem;
         margin-bottom: 1rem;
+    }
+
+    .collection-page .other p {
+        font-size: 14px;
+        color: #FFFFFF;
     }
 
     .collection-page .card button {
@@ -1033,13 +1079,14 @@ nav {
         display: block;
     }
 
-    .album-page .first-container .img-container, .album-page .first-container img {
+    .album-page .first-container .img-container,
+    .album-page .first-container img {
         min-width: 100%;
     }
 
     .album-page .info {
         min-width: 100%;
-        margin-top: 1rem;    
+        margin-top: 1rem;
     }
 
     .album-page .btns-container {
@@ -1075,7 +1122,7 @@ nav {
         flex-direction: column-reverse;
     }
 
-    
+
     /* ALBUM PAGE ENDS HERE */
 }
 
@@ -1112,6 +1159,7 @@ nav {
         max-width: 35rem;
 
     }
+
     /* CURRENT SONG ENDS HERE */
 }
 
