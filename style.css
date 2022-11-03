@@ -1,15 +1,12 @@
 html,
 body {
     margin: 0;
-    max-width: 100vw;
-    max-height: 100vh;
 }
 
 .container {
     box-sizing: border-box;
     background: #1e2224;
     padding: 0 1rem;
-    overflow-x: hidden;
 }
 
 @font-face {
@@ -209,12 +206,8 @@ nav {
 
 .card .heart-icon-container {
     min-width: 10%;
-    max-height: 2rem;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #efeee040;
-    border-radius: 50%;
+    justify-content: flex-end;
 }
 
 .card img {
@@ -312,8 +305,15 @@ nav {
     border-radius: .5rem;
 }
 
-.current-song p {
-    margin: 0;
+.current-song .song-name {
+    font-size: 17px;
+    color: #FFFFFF;
+}
+
+.current-song .artist {
+    margin-top: -0.75rem;
+    font-size: 12px;
+    color: #ffffff70;
 }
 
 .controls {
@@ -369,8 +369,6 @@ nav {
 
 /* COLLECTION PAGE STARTS HERE */
 .collection-page {
-    min-width: 100%;
-    min-height: 100vh;
     margin-top: 1rem;
     margin-left: 4.5rem;
 }
@@ -717,12 +715,17 @@ nav {
     }
 
     .current-song .song-info {
-        min-width: 80%;
+        min-width: 75%;
     }
 
     .controls {
-        min-width: 20%;
+        min-width: 25%;
+        min-height: 2rem;
         align-items: flex-end;
+    }
+
+    .control-btns {
+        min-height: 2rem;
     }
 
     /* CURRENT SONG ENDS HERE */
@@ -992,12 +995,17 @@ nav {
     }
 
     .current-song .song-info {
-        min-width: 80%;
+        min-width: 75%;
     }
 
     .controls {
-        min-width: 20%;
+        min-width: 25%;
+        min-height: 2rem;
         align-items: flex-end;
+    }
+
+    .control-btns {
+        min-height: 2rem;
     }
 
     /* CURRENT SONG ENDS HERE */
@@ -1154,12 +1162,10 @@ nav {
 
 
     /* CURRENT SONG STARTS HERE */
-
     .controls {
         max-width: 35rem;
 
     }
-
     /* CURRENT SONG ENDS HERE */
 }
 

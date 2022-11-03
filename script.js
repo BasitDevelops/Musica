@@ -70,7 +70,7 @@ const prevBtn = currentSongBar.querySelector('.prev-btn');
 let currentSongImg = currentSongBar.children[0].children[0].children[0];
 let currentSongTitle = currentSongBar.children[0].children[1].children[0];
 let currentSongArtist = currentSongBar.children[0].children[1].children[1];
-
+let currentSongAudio = currentSongBar.children[0].children[2];
 //
 
 //
@@ -137,8 +137,9 @@ topChartsTracks.forEach(function (track) {
     <div class="heart-icon-container">
     <i class="fa-solid fa-heart heart-icon"></i>
     </div>
-    <audio src="${track.src}" id="card-audio" preload="metadata"></audio>
-</div>`
+    <audio src="${track.src}" id="card-audio" preload="metadata"></audio>   
+</div>
+<span>${track.id}</span>`
 })
 
 let topChartsCards = document.querySelectorAll('.card .first-container');
@@ -154,10 +155,10 @@ topChartsCards.forEach(function (card) {
 
     card.addEventListener('click', function () {
         cardFlag = true;
+        cardIndex = Number(card.parentElement.nextElementSibling.textContent) - 1;
         songFlag = false;
 
         audio.currentTime = 0;
-        audio.play();
 
         document.addEventListener('play', function (e) {
             let audios = document.querySelectorAll('audio');
@@ -179,7 +180,11 @@ topChartsCards.forEach(function (card) {
         currentSongArtist.textContent = cardArtist;
         currentSongAudio.src = audio.src;
 
+        currentSongAudio.play();
+
         playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>';
+
+        seek(currentSongAudio);
     })
 })
 //
@@ -278,6 +283,7 @@ newReleasesTracks.forEach(function (track) {
         </p>
     </div>
     <audio src="${track.src}" id=""></audio>
+    <span>${track.id}</span>
     </div>`
 })
 
@@ -285,13 +291,11 @@ let newReleasesSongs = document.querySelectorAll('.song');
 
 newReleasesSongs.forEach(function (song) {
     let audio = song.querySelector('audio');
-
     song.addEventListener('click', function () {
         songFlag = true;
+        songIndex = Number(song.children[3].textContent) - 1;
         cardFlag = false;
-
         audio.currentTime = 0;
-        audio.play();
 
         document.addEventListener('play', function (e) {
             let audios = document.querySelectorAll('audio');
@@ -313,7 +317,11 @@ newReleasesSongs.forEach(function (song) {
         currentSongArtist.textContent = songArtist;
         currentSongAudio.src = audio.src;
 
+        currentSongAudio.play()
+
         playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>';
+
+        seek(currentSongAudio);
     })
 })
 
@@ -322,43 +330,56 @@ newReleasesSongs.forEach(function (song) {
 //
 
 //
-let currentSongAudio = currentSongBar.children[0].children[2];
 
 playOrPauseBtn.addEventListener('click', function () {
     if (currentSongAudio.paused) {
         currentSongAudio.play();
         playOrPauseBtn.innerHTML = `<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>`
+        seek(currentSongAudio);
     } else {
         currentSongAudio.pause();
         playOrPauseBtn.innerHTML = `<i class="fa-solid fa-circle-play fa-2xl"></i>`
     }
-    //FIX
 })
 
-songIndex = 0;
+//
+
+//
+
+//
 
 nextBtn.addEventListener('click', function () {
     if (cardFlag) {
-        songIndex++;
-        let nextAudio = topChartsCards[songIndex].nextElementSibling.nextElementSibling;
-        nextAudio.play();
+        if (cardIndex == topChartsCards.length - 1) {
+            cardIndex = -1;
+        }
 
-        let nextSongImg = topChartsCards[songIndex].children[0].children[0].src;
-        let nextSongTitle = topChartsCards[songIndex].children[1].children[0].textContent;
-        let nextSongArtist = topChartsCards[songIndex].children[1].children[1].textContent;
+        cardIndex++;
+        let nextAudio = topChartsCards[cardIndex].nextElementSibling.nextElementSibling;
+        nextAudio.currentTime = 0;
+
+        let nextSongImg = topChartsCards[cardIndex].children[0].children[0].src;
+        let nextSongTitle = topChartsCards[cardIndex].children[1].children[0].textContent;
+        let nextSongArtist = topChartsCards[cardIndex].children[1].children[1].textContent;
 
         currentSongImg.src = nextSongImg;
         currentSongTitle.textContent = nextSongTitle;
         currentSongArtist.textContent = nextSongArtist;
         currentSongAudio.src = nextAudio.src;
 
-        if (songIndex == topChartsCards.length - 1) {
+        currentSongAudio.play()
+
+        seek(currentSongAudio);
+    } else if (songFlag) {
+        if (songIndex == newReleasesSongs.length - 1) {
             songIndex = -1;
         }
-    } else if (songFlag) {
+
         songIndex++;
         let nextAudio = newReleasesSongs[songIndex].children[2];
-        nextAudio.play();
+        console.log(nextAudio);
+        console.log(newReleasesSongs.length);
+        nextAudio.currentTime = 0;
 
         let nextSongImg = newReleasesSongs[songIndex].children[0].src;
         let nextSongTitle = newReleasesSongs[songIndex].children[1].children[0].textContent;
@@ -369,33 +390,35 @@ nextBtn.addEventListener('click', function () {
         currentSongArtist.textContent = nextSongArtist;
         currentSongAudio.src = nextAudio.src;
 
-        if (songIndex == newReleasesSongs.length - 1) {
-            songIndex = -1;
-        }
+        currentSongAudio.play()
+
+        seek(currentSongAudio);
     }
     playOrPauseBtn.innerHTML = `<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>`
-    //FIX
 })
 
 prevBtn.addEventListener('click', function () {
     if (cardFlag) {
-        if (songIndex < 1) {
-            songIndex = topChartsCards.length;
+        if (cardIndex < 1) {
+            cardIndex = topChartsCards.length;
         }
 
-        songIndex--;
-        let prevAudio = topChartsCards[songIndex].nextElementSibling.nextElementSibling;
-        prevAudio.play();
+        cardIndex--;
+        let prevAudio = topChartsCards[cardIndex].nextElementSibling.nextElementSibling;
+        prevAudio.currentTime = 0;
 
-        let prevSongImg = topChartsCards[songIndex].children[0].children[0].src;
-        let prevSongTitle = topChartsCards[songIndex].children[1].children[0].textContent;
-        let prevSongArtist = topChartsCards[songIndex].children[1].children[1].textContent;
+        let prevSongImg = topChartsCards[cardIndex].children[0].children[0].src;
+        let prevSongTitle = topChartsCards[cardIndex].children[1].children[0].textContent;
+        let prevSongArtist = topChartsCards[cardIndex].children[1].children[1].textContent;
 
         currentSongImg.src = prevSongImg;
         currentSongTitle.textContent = prevSongTitle;
         currentSongArtist.textContent = prevSongArtist;
         currentSongAudio.src = prevAudio.src;
 
+        currentSongAudio.play();
+
+        seek(currentSongAudio);
     } else if (songFlag) {
         if (songIndex < 1) {
             songIndex = topChartsCards.length;
@@ -403,7 +426,7 @@ prevBtn.addEventListener('click', function () {
 
         songIndex--;
         let prevAudio = newReleasesSongs[songIndex].children[2];
-        prevAudio.play();
+        prevAudio.currentTime = 0;
 
         let prevSongImg = newReleasesSongs[songIndex].children[0].src;
         let prevSongTitle = newReleasesSongs[songIndex].children[1].children[0].textContent;
@@ -413,8 +436,12 @@ prevBtn.addEventListener('click', function () {
         currentSongTitle.textContent = prevSongTitle;
         currentSongArtist.textContent = prevSongArtist;
         currentSongAudio.src = prevAudio.src;
+
+        currentSongAudio.play()
+
+        seek(currentSongAudio);
     }
-    //FIX
+    playOrPauseBtn.innerHTML = `<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>`
 })
 //
 
@@ -424,13 +451,16 @@ prevBtn.addEventListener('click', function () {
 
 const progressBar = currentSongBar.querySelector('.progress-bar').children[0];
 
-currentSongAudio.addEventListener('timeupdate', function () {
-    progress = parseInt((currentSongAudio.currentTime / currentSongAudio.duration) * 100);
-    progressBar.value = progress;
-})
+function seek(currentSongAudio) {
+    currentSongAudio.addEventListener('timeupdate', function () {
+        progress = parseInt((currentSongAudio.currentTime / currentSongAudio.duration) * 100);
+        progressBar.value = progress;
+    })
 
-progressBar.addEventListener('change', function () {
-    console.log(currentSongAudio);
-    currentSongAudio.currentTime = progressBar.value * currentSongAudio.duration / 100;
-})
+    progressBar.addEventListener('change', function () {
+        currentSongAudio.currentTime = progressBar.value * currentSongAudio.duration / 100;
+    })
+}
+
+
 
