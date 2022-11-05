@@ -67,6 +67,8 @@ const currentSongBar = document.querySelector('.current-song');
 const playOrPauseBtn = currentSongBar.querySelector('.playorpause-btn');
 const nextBtn = currentSongBar.querySelector('.next-btn');
 const prevBtn = currentSongBar.querySelector('.prev-btn');
+const shuffleBtn = currentSongBar.querySelector('.shuffle-btn');
+const repeatBtn = currentSongBar.querySelector('.repeat-btn');
 let currentSongImg = currentSongBar.children[0].children[0].children[0];
 let currentSongTitle = currentSongBar.children[0].children[1].children[0];
 let currentSongArtist = currentSongBar.children[0].children[1].children[1];
@@ -114,6 +116,8 @@ const topChartsTracks = [
     }
 ]
 
+localStorage.setItem('topChartsTracks', JSON.stringify(topChartsTracks));
+
 const topChartsContainer = document.querySelector('.cards-container');
 
 topChartsTracks.forEach(function (track) {
@@ -135,7 +139,7 @@ topChartsTracks.forEach(function (track) {
         </div>
     </div>
     <div class="heart-icon-container">
-    <i class="fa-solid fa-heart heart-icon"></i>
+    <i class="fa-solid fa-heart heart-icon">#</i>
     </div>
     <audio src="${track.src}" id="card-audio" preload="metadata"></audio>   
 </div>
@@ -157,6 +161,7 @@ topChartsCards.forEach(function (card) {
         cardFlag = true;
         cardIndex = Number(card.parentElement.nextElementSibling.textContent) - 1;
         songFlag = false;
+        popularSongFlag = false;
 
         audio.currentTime = 0;
 
@@ -195,36 +200,40 @@ topChartsCards.forEach(function (card) {
 
 let likeIcons = document.querySelectorAll('.heart-icon');
 
+let likeIconIndex = 1;
+
 likeIcons.forEach(function (likeIcon) {
     let likeIconFlag = false;
     likeIcon.addEventListener('click', function () {
+        
+        let myCollectionId = likeIconIndex;
         let myCollectionBg = likeIcon.parentElement.previousElementSibling.children[0].children[0].src;
         let myCollectionName = likeIcon.parentElement.previousElementSibling.children[1].children[0].textContent;
         let myCollectionArtist = likeIcon.parentElement.previousElementSibling.children[1].children[1].textContent;
+        let myCollectionAudio = likeIcon.parentElement.nextElementSibling.src;
 
         let myCollectionInfo = {
+            id: myCollectionId,
             backgroundImg: myCollectionBg,
             name: myCollectionName,
-            artist: myCollectionArtist
+            artist: myCollectionArtist,
+            src: myCollectionAudio
         }
 
         if (!likeIconFlag) {
+            likeIconIndex++;
             likeIcon.style.color = 'red';
-            myCollection.push(myCollectionInfo);
+            localStorage.setItem(JSON.stringify(myCollectionName.trim()), JSON.stringify(myCollectionInfo))
             likeIconFlag = true;
+            console.log(myCollectionInfo);
         } else {
+            likeIconIndex--
             likeIcon.style.color = '#efeee040';
-            myCollection.splice(myCollectionInfo, 1);
+            localStorage.removeItem(JSON.stringify(myCollectionInfo.name.trim()))
             likeIconFlag = false;
         }
     })
 })
-
-const myCollection = [];
-
-// const myCollectionContainer = document.querySelector('#my-collection');
-
-// console.log(myCollectionContainer);
 
 //
 
@@ -295,6 +304,7 @@ newReleasesSongs.forEach(function (song) {
         songFlag = true;
         songIndex = Number(song.children[3].textContent) - 1;
         cardFlag = false;
+        popularSongFlag = false;
         audio.currentTime = 0;
 
         document.addEventListener('play', function (e) {
@@ -331,6 +341,134 @@ newReleasesSongs.forEach(function (song) {
 
 //
 
+async function fetchApi() {
+    const response = await fetch('https://musica-api.up.railway.app/new');
+    const data = await response.json();
+
+    const popularInYourAreaContainer = document.querySelector('.popular .songs-container');
+
+    data.forEach(function (track) {
+        popularInYourAreaContainer.innerHTML += `<div class="song">
+        <img src="${track.cover}" alt="">
+        <div class="song-info">
+            <p class="song-title">
+                ${track.title}
+            </p>
+            <p class="artist">
+                ${track.artist}
+            </p>
+        </div>
+        <audio src="${track.audio}" id=""></audio>
+        <span>${track.id}</span>
+    </div>`
+    })
+
+    let popularSongs = popularInYourAreaContainer.querySelectorAll('.song');
+
+    popularSongs.forEach(function name(popularSong) {
+        let audio = popularSong.querySelector('audio');
+        popularSong.addEventListener('click', function () {
+            popularSongFlag = true;
+            popularSongIndex = Number(popularSong.children[3].textContent.slice(4)) - 1;
+            cardFlag = false;
+            songFlag = false;
+            audio.currentTime = 0;
+
+            document.addEventListener('play', function (e) {
+                let audios = document.querySelectorAll('audio');
+                audios.forEach(function (audio) {
+                    if (audio != e.target) {
+                        audio.pause();
+                    }
+                })
+            }, true)
+
+            currentSongBar.classList.add('display-current-song');
+
+            let songImg = popularSong.children[0].src
+            let songTitle = popularSong.children[1].children[0].textContent;
+            let songArtist = popularSong.children[1].children[1].textContent;
+
+            currentSongImg.src = songImg;
+            currentSongTitle.textContent = songTitle;
+            currentSongArtist.textContent = songArtist;
+            currentSongAudio.src = audio.src;
+
+            currentSongAudio.play()
+
+            playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>';
+
+            seek(currentSongAudio);
+        })
+    })
+
+    nextBtn.addEventListener('click', function () {
+        if (popularSongFlag) {
+            if (shuffleBtnFlag) {
+                popularSongIndex = Math.floor(Math.random() * topChartsCards.length);
+            }
+
+            if (popularSongIndex == popularSongs.length - 1) {
+                popularSongIndex = -1;
+            }
+
+            popularSongIndex++;
+            let nextAudio = popularSongs[popularSongIndex].children[2];
+            nextAudio.currentTime = 0;
+
+            let nextSongImg = popularSongs[popularSongIndex].children[0].src;
+            let nextSongTitle = popularSongs[popularSongIndex].children[1].children[0].textContent;
+            let nextSongArtist = popularSongs[popularSongIndex].children[1].children[1].textContent;
+
+            currentSongImg.src = nextSongImg;
+            currentSongTitle.textContent = nextSongTitle;
+            currentSongArtist.textContent = nextSongArtist;
+            currentSongAudio.src = nextAudio.src;
+
+            currentSongAudio.play()
+
+            seek(currentSongAudio);
+        }
+    })
+
+    prevBtn.addEventListener('click', function () {
+        if (popularSongFlag) {
+            if (shuffleBtnFlag) {
+                popularSongIndex = Math.floor(Math.random() * topChartsCards.length);
+            }
+
+            if (popularSongIndex < 1) {
+                popularSongIndex = popularSongs.length;
+            }
+
+            popularSongIndex--;
+            let nextAudio = popularSongs[popularSongIndex].children[2];
+            nextAudio.currentTime = 0;
+
+            let nextSongImg = popularSongs[popularSongIndex].children[0].src;
+            let nextSongTitle = popularSongs[popularSongIndex].children[1].children[0].textContent;
+            let nextSongArtist = popularSongs[popularSongIndex].children[1].children[1].textContent;
+
+            currentSongImg.src = nextSongImg;
+            currentSongTitle.textContent = nextSongTitle;
+            currentSongArtist.textContent = nextSongArtist;
+            currentSongAudio.src = nextAudio.src;
+
+            currentSongAudio.play()
+
+            seek(currentSongAudio);
+        }
+    })
+}
+
+fetchApi();
+
+//
+
+//
+
+//
+
 playOrPauseBtn.addEventListener('click', function () {
     if (currentSongAudio.paused) {
         currentSongAudio.play();
@@ -350,6 +488,10 @@ playOrPauseBtn.addEventListener('click', function () {
 
 nextBtn.addEventListener('click', function () {
     if (cardFlag) {
+        if (shuffleBtnFlag) {
+            cardIndex = Math.floor(Math.random() * topChartsCards.length);
+        }
+
         if (cardIndex == topChartsCards.length - 1) {
             cardIndex = -1;
         }
@@ -371,14 +513,16 @@ nextBtn.addEventListener('click', function () {
 
         seek(currentSongAudio);
     } else if (songFlag) {
+        if (shuffleBtnFlag) {
+            songIndex = Math.floor(Math.random() * topChartsCards.length);
+        }
+
         if (songIndex == newReleasesSongs.length - 1) {
             songIndex = -1;
         }
 
         songIndex++;
         let nextAudio = newReleasesSongs[songIndex].children[2];
-        console.log(nextAudio);
-        console.log(newReleasesSongs.length);
         nextAudio.currentTime = 0;
 
         let nextSongImg = newReleasesSongs[songIndex].children[0].src;
@@ -399,6 +543,10 @@ nextBtn.addEventListener('click', function () {
 
 prevBtn.addEventListener('click', function () {
     if (cardFlag) {
+        if (shuffleBtnFlag) {
+            cardIndex = Math.floor(Math.random() * topChartsCards.length);
+        }
+
         if (cardIndex < 1) {
             cardIndex = topChartsCards.length;
         }
@@ -420,6 +568,10 @@ prevBtn.addEventListener('click', function () {
 
         seek(currentSongAudio);
     } else if (songFlag) {
+        if (shuffleBtnFlag) {
+            songIndex = Math.floor(Math.random() * topChartsCards.length);
+        }
+
         if (songIndex < 1) {
             songIndex = topChartsCards.length;
         }
@@ -441,7 +593,39 @@ prevBtn.addEventListener('click', function () {
 
         seek(currentSongAudio);
     }
-    playOrPauseBtn.innerHTML = `<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>`
+    playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>';
+})
+//
+
+//
+
+//
+let shuffleBtnFlag = false;
+
+shuffleBtn.addEventListener('click', () => {
+    let shuffleBtnIcon = shuffleBtn.children[0];
+    if (!shuffleBtnFlag) {
+        shuffleBtnIcon.style.color = '#FACD66';
+        shuffleBtnFlag = true;
+    } else {
+        shuffleBtnIcon.style.color = '#FFFFFF';
+        shuffleBtnFlag = false;
+    }
+})
+
+//
+
+let repeatBtnFlag = false;
+
+repeatBtn.addEventListener('click', () => {
+    let repeatBtnIcon = repeatBtn.children[0];
+    if (!repeatBtnFlag) {
+        repeatBtnIcon.style.color = '#FACD66';
+        repeatBtnFlag = true;
+    } else {
+        repeatBtnIcon.style.color = '#FFFFFF';
+        repeatBtnFlag = false;
+    }
 })
 //
 
@@ -455,12 +639,31 @@ function seek(currentSongAudio) {
     currentSongAudio.addEventListener('timeupdate', function () {
         progress = parseInt((currentSongAudio.currentTime / currentSongAudio.duration) * 100);
         progressBar.value = progress;
+        if (repeatBtnFlag) {
+            if (currentSongAudio.currentTime == currentSongAudio.duration) {
+                currentSongAudio.currentTime = 0;
+                currentSongAudio.play();
+            }
+        }
+        if (currentSongAudio.currentTime == currentSongAudio.duration) {
+            playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-play fa-2xl"></i>';
+        }
     })
 
     progressBar.addEventListener('change', function () {
         currentSongAudio.currentTime = progressBar.value * currentSongAudio.duration / 100;
     })
 }
+//
+
+//
+
+//
+
+
+
+
+
 
 
 

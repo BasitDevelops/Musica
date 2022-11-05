@@ -17,8 +17,11 @@ body {
 * {
     font-family: quicksand;
     color: #efeee040;
-    /* outline: 1px solid greenyellow; */
     text-decoration: none;
+}
+
+span {
+    display: none;
 }
 
 /* NAVBAR STARTS HERE */
@@ -162,7 +165,7 @@ nav {
     right: 0;
 }
 
-.second-container {
+.currated-playlist .second-container {
     z-index: 1;
 }
 
@@ -171,7 +174,8 @@ nav {
 }
 
 .top-charts h4,
-.new-releases h4 {
+.new-releases h4,
+.popular h4 {
     margin: 0;
     font-weight: 700;
     font-size: 1.5rem;
@@ -184,7 +188,18 @@ nav {
 }
 
 .top-charts .cards-container::-webkit-scrollbar {
-    display: none;
+    width: .5rem;
+    height: .5rem;
+    background-color: #1e2224;
+}
+
+.top-charts .cards-container::-webkit-scrollbar-thumb {
+    background-color: #efeee040;
+    border-radius: 1rem;
+}
+
+.top-charts .cards-container::-webkit-scrollbar-thumb:hover {
+    background-color: #efeee025;
 }
 
 .top-charts .card {
@@ -233,7 +248,8 @@ nav {
     font-size: 0.625rem;
 }
 
-.new-releases {
+.new-releases,
+.popular {
     margin-top: 2.5rem;
 }
 
@@ -245,7 +261,18 @@ nav {
 }
 
 .songs-container::-webkit-scrollbar {
-    display: none;
+    width: .5rem;
+    height: .5rem;
+    background-color: #1e2224;
+}
+
+.songs-container::-webkit-scrollbar-thumb {
+    background-color: #efeee040;
+    border-radius: 1rem;
+}
+
+.songs-container::-webkit-scrollbar-thumb:hover {
+    background-color: #efeee025;
 }
 
 .songs-container .song {
@@ -353,11 +380,26 @@ nav {
     min-width: 85%;
 }
 
+input[type="range"]::-webkit-slider-runnable-track {
+    height: .25rem;
+    cursor: pointer;
+    background-color: #efeee040;
+    border-radius: 1rem;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    margin-top: -0.35rem;
+}
+
 .volume {
     min-width: 20%;
     display: flex;
     justify-content: flex-end;
     gap: .5rem;
+}
+
+.volume-icon i {
+    color: #FFFFFF;
 }
 
 .volume-bar {
@@ -390,39 +432,34 @@ nav {
 .collection-page .cards-container {
     margin-top: 1.5rem;
     display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .collection-page .card {
     min-width: 12.5rem;
     min-height: 12.5rem;
-    background-image: url(./images/Rectangle\ 26.png);
+    /* background-image: url(./images/Rectangle\ 26.png); */
     border-radius: 1rem;
     background-repeat: no-repeat;
     background-size: contain;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-}
-
-.card-bg-2 {
-    background-image: url(./images/Rectangle\ 27.png) !important;
-}
-
-.card-bg-3 {
-    background-image: url(./images/Rectangle\ 28.png) !important;
+    margin-bottom: .25rem;
 }
 
 .collection-page .card-title {
+    max-width: 5rem;
     position: relative;
     left: 1rem;
-
 }
 
 .collection-page .artist {
+    max-width: 5rem;
     margin-top: -1rem;
     position: relative;
     left: 1rem;
-
 }
 
 .collection-page .other {
@@ -457,8 +494,8 @@ nav {
     gap: 1.3rem;
 }
 
-.album-page .first-container .img-container img{
-   border-radius: 1rem;
+.album-page .first-container .img-container img {
+    border-radius: 1rem;
 }
 
 .album-page .info {
@@ -602,7 +639,7 @@ nav {
     .search-bar {
         box-sizing: border-box;
         margin-top: -0.25rem;
-        margin-left:  -0.05rem;
+        margin-left: -0.05rem;
         min-width: 100%;
         position: absolute;
         left: 0;
@@ -693,6 +730,10 @@ nav {
         overflow-x: scroll;
     }
 
+    .top-charts .cards-container::-webkit-scrollbar {
+        display: none;
+    }
+
     .top-charts .card {
         min-width: 77.5vw;
     }
@@ -701,6 +742,10 @@ nav {
         display: flex;
         flex-direction: column;
         gap: 1rem;
+    }
+
+    .songs-container::-webkit-scrollbar {
+        display: none;
     }
 
     /* HOME PAGE ENDS HERE */
@@ -733,6 +778,7 @@ nav {
     /* COLLECTION PAGE STARTS HERE */
     .collection-page {
         margin: 0;
+        min-height: 100vh;
     }
 
     .collection-page .links {
@@ -751,9 +797,10 @@ nav {
     }
 
     .collection-page .cards-container {
+        box-sizing: border-box;
         margin-top: 1.5rem;
         display: block;
-
+        padding-bottom: .25rem;
     }
 
     .collection-page .card {
@@ -884,7 +931,7 @@ nav {
     .search-bar {
         box-sizing: border-box;
         margin-top: -0.25rem;
-        margin-left:  -0.05rem;
+        margin-left: -0.05rem;
         min-width: 100%;
         position: absolute;
         left: 0;
@@ -977,10 +1024,18 @@ nav {
         overflow-x: scroll;
     }
 
+    .top-charts .cards-container::-webkit-scrollbar {
+        display: none;
+    }
+
     .card .first-container {
         display: flex;
         flex-direction: column;
         gap: 1rem;
+    }
+
+    .songs-container::-webkit-scrollbar {
+        display: none;
     }
 
     /* HOME PAGE ENDS HERE */
@@ -1013,6 +1068,7 @@ nav {
     /* COLLECTION PAGE STARTS HERE */
     .collection-page {
         margin: 0;
+        min-height: 100vh;
     }
 
     .collection-page .links {
@@ -1032,16 +1088,12 @@ nav {
 
     .collection-page .cards-container {
         margin-top: 1.5rem;
-        display: block;
 
     }
 
     .collection-page .card {
-        min-height: 17.5rem;
         background-size: cover;
         border-radius: 1rem;
-        margin-bottom: 1.5rem;
-
     }
 
     .collection-page .card-title {
@@ -1166,6 +1218,7 @@ nav {
         max-width: 35rem;
 
     }
+
     /* CURRENT SONG ENDS HERE */
 }
 
