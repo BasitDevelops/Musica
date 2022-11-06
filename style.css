@@ -440,6 +440,8 @@ input[type="range"]::-webkit-slider-thumb {
     min-width: 12.5rem;
     min-height: 12.5rem;
     /* background-image: url(./images/Rectangle\ 26.png); */
+    background-color: #1e2224;
+    background-blend-mode: soft-light;
     border-radius: 1rem;
     background-repeat: no-repeat;
     background-size: contain;

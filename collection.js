@@ -41,6 +41,32 @@ searchBtn.addEventListener('click', function () {
 //
 
 //
+if (window.location.href == 'http://127.0.0.1:5500/collection.html' || window.location.href == 'https://basitdevelops.github.io/Musica/collection.html') {
+    let collectionLinkIcon = sideMenu.children[0].children[1].children[0].children[0];
+    let collectionLinkText = sideMenu.children[0].children[1].children[0].children[1];
+    collectionLinkIcon.classList.add('active-link-icon')
+    collectionLinkText.classList.add('active-link-text')
+}
+//
+
+//
+
+//
+const currentSongBar = document.querySelector('.current-song');
+const playOrPauseBtn = currentSongBar.querySelector('.playorpause-btn');
+const nextBtn = currentSongBar.querySelector('.next-btn');
+const prevBtn = currentSongBar.querySelector('.prev-btn');
+const shuffleBtn = currentSongBar.querySelector('.shuffle-btn');
+const repeatBtn = currentSongBar.querySelector('.repeat-btn');
+let currentSongImg = currentSongBar.children[0].children[0].children[0];
+let currentSongTitle = currentSongBar.children[0].children[1].children[0];
+let currentSongArtist = currentSongBar.children[0].children[1].children[1];
+let currentSongAudio = currentSongBar.children[0].children[2];
+//
+
+//
+
+//
 
 const myCollectionContainer = document.querySelector('#my-collection');
 
@@ -57,7 +83,7 @@ getTopChartsTracks.forEach(function (track) {
 })
 
 likedCardsTracks.forEach(function (likedTrack) {
-    console.log(likedTrack);
+    // console.log(likedTrack);
     myCollectionContainer.innerHTML += `<div class="card" id="liked-card">
     <p class="card-title">${likedTrack.name}</p>
     <p class="artist">${likedTrack.artist}</p>
@@ -71,6 +97,7 @@ likedCardsTracks.forEach(function (likedTrack) {
         </button>
     </div>
     <span class="bg-img">${likedTrack.backgroundImg}</span>
+    <audio src="${likedTrack.src}"></audio>
 </div>`
 })
 
@@ -83,5 +110,41 @@ likedCards.forEach(function (card) {
     if (cardTitle.textContent == 'undefined') {
         card.style.display = 'none';
     }
+
+    let playBtns = card.querySelectorAll('.play-btn');
+
+    playBtns.forEach(function (playBtn) {
+        playBtn.addEventListener('click', function () {
+            let audio = card.querySelector('audio');
+            console.log(audio);
+
+            audio.currentTime = 0;
+
+            document.addEventListener('play', function (e) {
+                let audios = document.querySelectorAll('audio');
+                audios.forEach(function (audio) {
+                    if (audio != e.target) {
+                        audio.pause();
+                    }
+                })
+            }, true)
+
+            currentSongBar.classList.add('display-current-song');
+
+            // let cardImg = `<img src="${backgroundImg}" >`
+            let cardTitle = card.children[0].textContent;
+            let cardArtist = card.children[1].textContent;
+
+            // currentSongImg.src = cardImg;
+            currentSongTitle.textContent = cardTitle;
+            currentSongArtist.textContent = cardArtist;
+            currentSongAudio.src = audio.src;
+
+            currentSongAudio.play();
+
+            console.log(backgroundImg);
+        })
+    })
+
 
 })

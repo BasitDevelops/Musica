@@ -46,11 +46,6 @@ if (window.location.href == 'http://127.0.0.1:5500/index.html' || window.locatio
     let homeLinkText = sideMenu.children[0].children[0].children[0].children[1];
     homeLinkIcon.classList.add('active-link-icon')
     homeLinkText.classList.add('active-link-text')
-} else if (window.location.href == 'http://127.0.0.1:5500/collection.html' || window.location.href == 'https://basitdevelops.github.io/Musica/collection.html') {
-    let collectionLinkIcon = sideMenu.children[0].children[1].children[0].children[0];
-    let collectionLinkText = sideMenu.children[0].children[1].children[0].children[1];
-    collectionLinkIcon.classList.add('active-link-icon')
-    collectionLinkText.classList.add('active-link-text')
 } else if (window.location.href == 'http://127.0.0.1:5500/album.html' || window.location.href == 'https://basitdevelops.github.io/Musica/album.html') {
     let albumLinkIcon = sideMenu.children[0].children[2].children[0].children[0];
     let albumLinkText = sideMenu.children[0].children[2].children[0].children[1];
@@ -203,14 +198,21 @@ let likeIcons = document.querySelectorAll('.heart-icon');
 let likeIconIndex = 1;
 
 likeIcons.forEach(function (likeIcon) {
+    let myCollectionBg = likeIcon.parentElement.previousElementSibling.children[0].children[0].src;
+    let myCollectionName = likeIcon.parentElement.previousElementSibling.children[1].children[0].textContent;
+    let myCollectionArtist = likeIcon.parentElement.previousElementSibling.children[1].children[1].textContent;
+    let myCollectionAudio = likeIcon.parentElement.nextElementSibling.src;
+
     let likeIconFlag = false;
-    likeIcon.addEventListener('click', function () {
-        
+    let key = localStorage.getItem(JSON.stringify(myCollectionName.trim()));
+
+    if (key) {
+        likeIcon.style.color = 'red';
+        likeIconFlag = true;
+    }
+
+    likeIcon.addEventListener('click', function () {  
         let myCollectionId = likeIconIndex;
-        let myCollectionBg = likeIcon.parentElement.previousElementSibling.children[0].children[0].src;
-        let myCollectionName = likeIcon.parentElement.previousElementSibling.children[1].children[0].textContent;
-        let myCollectionArtist = likeIcon.parentElement.previousElementSibling.children[1].children[1].textContent;
-        let myCollectionAudio = likeIcon.parentElement.nextElementSibling.src;
 
         let myCollectionInfo = {
             id: myCollectionId,
@@ -225,7 +227,6 @@ likeIcons.forEach(function (likeIcon) {
             likeIcon.style.color = 'red';
             localStorage.setItem(JSON.stringify(myCollectionName.trim()), JSON.stringify(myCollectionInfo))
             likeIconFlag = true;
-            console.log(myCollectionInfo);
         } else {
             likeIconIndex--
             likeIcon.style.color = '#efeee040';
