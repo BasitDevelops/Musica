@@ -15,12 +15,12 @@ toggleBtn.addEventListener('click', function () {
         sideMenu.style.top = navHeight;
         sideMenu.classList.add('display-side-menu');
         toggleBtn.innerHTML = '<i class="fa-solid fa-xmark lg"></i>';
-        // body.style.overflowY = 'hidden';
+        body.style.overflowY = 'hidden';
     } else {
         sideMenuFlag = false;
         sideMenu.classList.remove('display-side-menu');
         toggleBtn.innerHTML = '<i class="fa-solid fa-equals lg"></i>'
-        // body.style.overflowY = 'scroll';
+        body.style.overflowY = 'scroll';
     }
 })
 
@@ -110,83 +110,6 @@ let currentSongAudio = currentSongBar.children[0].children[2];
 
 const topChartsContainer = document.querySelector('.cards-container');
 
-// topChartsTracks.forEach(function (track) {
-//     topChartsContainer.innerHTML += `<div class="card">
-//     <div class="first-container">
-//     <div class="img-container">
-//             <img src="${track.coverArt}" alt="">
-//         </div>
-//         <div class="card-info">
-//             <p class="card-title">
-//             ${track.name}
-//             </p>
-//             <p class="artist">
-//             ${track.artist}
-//             </p>
-//             <p class="card-duration">
-
-//             </p>
-//         </div>
-//     </div>
-//     <div class="heart-icon-container">
-//     <i class="fa-solid fa-heart heart-icon">#</i>
-//     </div>
-//     <audio src="${track.src}" id="card-audio" preload="metadata"></audio>   
-// </div>
-// // <span>${track.id}</span>`
-// })
-
-// let topChartsCards = document.querySelectorAll('.card .first-container');
-
-// topChartsCards.forEach(function (card) {
-//     let audio = card.nextElementSibling.nextElementSibling;
-//     audio.addEventListener('loadedmetadata', function () {
-//         let cardDuration = document.querySelector('.card-duration');
-//         let audioDuration = (audio.duration / 60).toFixed(2);
-//         cardDuration.innerHTML = audioDuration;
-//         //FIX
-//     })
-
-//     card.addEventListener('click', function () {
-// cardFlag = true;
-// cardIndex = Number(card.parentElement.nextElementSibling.textContent) - 1;
-// songFlag = false;
-// popularSongFlag = false;
-
-// audio.currentTime = 0;
-
-// document.addEventListener('play', function (e) {
-//     let audios = document.querySelectorAll('audio');
-//     audios.forEach(function (audio) {
-//         if (audio != e.target) {
-//             audio.pause();
-//         }
-//     })
-// }, true)
-
-// currentSongBar.classList.add('display-current-song');
-
-// let cardImg = card.children[0].children[0].src;
-// let cardTitle = card.children[1].children[0].textContent;
-// let cardArtist = card.children[1].children[1].textContent;
-
-// currentSongImg.src = cardImg;
-// currentSongTitle.textContent = cardTitle;
-// currentSongArtist.textContent = cardArtist;
-// currentSongAudio.src = audio.src;
-
-// currentSongAudio.play();
-
-// playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>';
-
-// seek(currentSongAudio);
-//     })
-// })
-//
-
-//
-
-//
 async function fetchPlaylistApi() {
     const response = await fetch('https://musica-api.up.railway.app/playlist');
 
@@ -206,9 +129,6 @@ async function fetchPlaylistApi() {
                 </p>
                 <p class="artist">
                 ${playlist.info}
-                </p>
-                <p class="card-duration">
-    
                 </p>
             </div>
         </div>
@@ -296,6 +216,7 @@ async function fetchPlaylistApi() {
                     card.parentElement.removeChild(element);
                     playlistFlag = false;
                     body.style.overflowY = 'scroll';
+                    body.style.height = '';
                 }
             })
 

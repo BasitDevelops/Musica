@@ -347,16 +347,18 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: .5rem;
 }
 
 .controls .control-btns {
+    min-height: 2.25rem;
     display: flex;
     align-items: center;
     gap: 2rem;
 }
 
 .controls button {
+    min-height: 2.25rem;
     background-color: rgba(29, 33, 35, 0.01);
     border: none;
 }
@@ -449,9 +451,8 @@ input[type="range"]::-webkit-slider-thumb {
     margin-bottom: .25rem;
 }
 .collection-page .card:hover {
-    transform: scale(1.5);
+    /* transform: scale(1.5); */
 }
-
 
 .collection-page .card-title {
     max-width: 5rem;
@@ -467,13 +468,14 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .collection-page .other {
-    display: none;
+    display: flex;
+    justify-content: space-around;
 }
 
 .collection-page .card button {
     background-color: rgba(255, 255, 255, 0);
     border: none;
-    display: none;
+    /* display: none; */
 }
 
 /* COLLECTION PAGE ENDS HERE */
@@ -564,8 +566,8 @@ input[type="range"]::-webkit-slider-thumb {
 .playlist-songs .song {
     box-sizing: border-box;
     min-width: 100%;
-    background: rgba(51, 55, 59, 0.37);
-    backdrop-filter: blur(5px);
+    background: rgba(51, 55, 59, 0.5);
+    backdrop-filter: blur(25px);
     border-radius: 15px;
     display: flex;
     align-items: center;
@@ -732,10 +734,6 @@ input[type="range"]::-webkit-slider-thumb {
 
     }
 
-    /* .currated-playlist .likes {
-    min-width: 100%;
-} */
-
     .currated-playlist .second-container {
         display: none;
     }
@@ -772,7 +770,6 @@ input[type="range"]::-webkit-slider-thumb {
 
     /* CURRENT SONG STARTS HERE */
     .shuffle-btn,
-    .prev-btn,
     .repeat-btn,
     .progress-bar,
     .volume {
@@ -780,17 +777,19 @@ input[type="range"]::-webkit-slider-thumb {
     }
 
     .current-song .song-info {
-        min-width: 75%;
+        min-width: 70%;
     }
 
     .controls {
+        margin-left: 5%;
         min-width: 25%;
         min-height: 2rem;
         align-items: flex-end;
     }
 
-    .control-btns {
-        min-height: 2rem;
+    .controls .control-btns {
+        gap: .5rem;
+
     }
 
     /* CURRENT SONG ENDS HERE */
@@ -1066,7 +1065,6 @@ input[type="range"]::-webkit-slider-thumb {
 
     /* CURRENT SONG STARTS HERE */
     .shuffle-btn,
-    .prev-btn,
     .repeat-btn,
     .progress-bar,
     .volume {
@@ -1074,17 +1072,18 @@ input[type="range"]::-webkit-slider-thumb {
     }
 
     .current-song .song-info {
-        min-width: 75%;
+        min-width: 70%;
     }
 
-    .controls {
+    .controls { 
+        margin-left: 5%;
         min-width: 25%;
         min-height: 2rem;
         align-items: flex-end;
     }
 
     .control-btns {
-        min-height: 2rem;
+        gap: 1rem;
     }
 
     /* CURRENT SONG ENDS HERE */
