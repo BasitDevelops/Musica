@@ -3,12 +3,11 @@ const toggleBtn = document.querySelector('.toggle-btn-container');
 const sideMenu = document.querySelector('.side-menu');
 const searchBtn = document.querySelector('.search-icon-container');
 const searchBar = document.querySelector('.search-bar');
-
 let sideMenuFlag = false;
 let searchBarFlag = false;
 let navHeight = `${navBar.getBoundingClientRect().height}px`;
 const body = document.body;
-
+//
 toggleBtn.addEventListener('click', function () {
     if (!sideMenuFlag) {
         sideMenuFlag = true;
@@ -26,7 +25,6 @@ toggleBtn.addEventListener('click', function () {
         body.style.height = '';
     }
 })
-
 searchBtn.addEventListener('click', function () {
     if (!searchBarFlag) {
         searchBarFlag = true;
@@ -38,16 +36,12 @@ searchBtn.addEventListener('click', function () {
     }
 })
 //
-//
-//
 if (window.location.href == 'http://127.0.0.1:5500/index.html' || window.location.href == 'https://basitdevelops.github.io/Musica/index.html' || window.location.href == 'https://basitdevelops.github.io/Musica/') {
     let homeLinkIcon = sideMenu.children[0].children[0].children[0].children[0];
     let homeLinkText = sideMenu.children[0].children[0].children[0].children[1];
     homeLinkIcon.classList.add('active-link-icon');
     homeLinkText.classList.add('active-link-text');
 }
-//
-//
 //
 const currentSongBar = document.querySelector('.current-song');
 const playOrPauseBtn = currentSongBar.querySelector('.playorpause-btn');
@@ -59,8 +53,6 @@ let currentSongImg = currentSongBar.children[0].children[0].children[0];
 let currentSongTitle = currentSongBar.children[0].children[1].children[0];
 let currentSongArtist = currentSongBar.children[0].children[1].children[1];
 let currentSongAudio = currentSongBar.children[0].children[2];
-//
-//
 //
 const topChartsContainer = document.querySelector('.cards-container');
 async function fetchPlaylistApi() {
@@ -88,7 +80,6 @@ async function fetchPlaylistApi() {
     </div>`
         localStorage.setItem(JSON.stringify(playlist.title), JSON.stringify(playlist.files));
     })
-
     let topChartsCards = document.querySelectorAll('.card .first-container');
     topChartsCards.forEach(function (card) {
         let playlistCover = card.querySelector('img').src;
@@ -96,7 +87,6 @@ async function fetchPlaylistApi() {
         let playlistInfo = card.querySelector('.artist').textContent;
         let playlistFiles = JSON.parse(localStorage.getItem(JSON.stringify(playlistTitle.trim())));
         playlistFlag = false;
-
         card.addEventListener('click', function () {
             playlistFlag = true;
             let element = document.createElement('div');
@@ -147,11 +137,10 @@ async function fetchPlaylistApi() {
             </div>
             <div class="songs-container"></div>
             <i class="fa-solid fa-xmark fa-2x close-playlist"></i>`
-
             card.parentElement.appendChild(element);
             element.style.backgroundImage = `url(${playlistCover})`;
             let songsContainer = card.parentElement.querySelector('.songs-container');
-
+            //
             let x = window.matchMedia("(max-width: 960px)")
             if (x.matches) {
                 window.scrollY = '0'
@@ -159,7 +148,6 @@ async function fetchPlaylistApi() {
             body.style.overflowY = 'hidden';
             body.style.height = '100vh';
             element.style.top = `${window.scrollY}px`;
-
             let closePlaylistIcon = element.querySelector('.close-playlist');
             closePlaylistIcon.addEventListener('click', function () {
                 if (playlistFlag) {
@@ -170,14 +158,12 @@ async function fetchPlaylistApi() {
                 }
             })
             //
-            //
-            //
             const addToCollectionBtn = element.querySelector('.add-to-collection-btn');
             let likeIcon = addToCollectionBtn.parentElement.parentElement.parentElement.parentElement.parentElement.children[1].children[0];
             let playlistBg = likeIcon.parentElement.previousElementSibling.children[0].children[0].src;
             let playlistName = likeIcon.parentElement.previousElementSibling.children[1].children[0].textContent;
             let playlistDetails = likeIcon.parentElement.previousElementSibling.children[1].children[1].textContent;
-
+            //
             let key = localStorage.getItem(JSON.stringify(playlistBg.trim()));
             if (key) {
                 addToCollectionBtn.children[1].textContent = 'Remove from collection';
@@ -186,14 +172,12 @@ async function fetchPlaylistApi() {
                 addToCollectionBtn.children[1].textContent = 'Add to collection';
                 likeIcon.style.color = '#efeee040';
             }
-
             addToCollectionBtn.addEventListener('click', function () {
                 let playlist = {
                     backgroundImg: playlistBg,
                     name: playlistName,
                     info: playlistDetails
                 }
-
                 if (!key) {
                     addToCollectionBtn.children[1].textContent = 'Remove from collection';
                     alert('This playlist has been added to your collection');
@@ -208,8 +192,6 @@ async function fetchPlaylistApi() {
                     key = false;
                 }
             })
-            //
-            //
             //
             playlistFiles.forEach(function (file) {
                 songsContainer.innerHTML += `
@@ -237,8 +219,6 @@ async function fetchPlaylistApi() {
                 </div>`
             })
             //
-            //
-            //
             let songs = card.parentElement.querySelectorAll('.song');
             songs.forEach(function (song) {
                 let audio = song.querySelector('audio')
@@ -249,7 +229,7 @@ async function fetchPlaylistApi() {
                     songFlag = false;
                     popularSongFlag = false;
                     audio.currentTime = 0;
-
+                    //
                     document.addEventListener('play', function (e) {
                         let audios = document.querySelectorAll('audio');
                         audios.forEach(function (audio) {
@@ -258,103 +238,86 @@ async function fetchPlaylistApi() {
                             }
                         })
                     }, true)
-
+                    //
                     currentSongBar.classList.add('display-current-song');
-
                     let songImg = song.children[0].children[0].src;
                     let songTitle = song.children[2].children[0].children[0].textContent;
                     let songArtist = song.children[2].children[0].children[1].textContent;
-
                     currentSongImg.src = songImg;
                     currentSongTitle.textContent = songTitle;
                     currentSongArtist.textContent = songArtist;
                     currentSongAudio.src = audio.src;
-
                     currentSongAudio.play();
                     playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl fa-beat" style="--fa-animation-duration: 2s;"></i>';
                     seek(currentSongAudio);
                 })
             })
-
             nextBtn.addEventListener('click', function () {
                 if (cardFlag) {
                     if (shuffleBtnFlag) {
                         cardIndex = Math.floor(Math.random() * songs.length);
                     }
-
                     if (cardIndex == songs.length - 1) {
                         cardIndex = -1;
                     }
-
                     cardIndex++;
                     let nextAudio = songs[cardIndex].children[3];
                     nextAudio.currentTime = 0;
-
                     let nextSongImg = songs[cardIndex].children[0].children[0].src;
                     let nextSongTitle = songs[cardIndex].children[2].children[0].children[0].textContent;
                     let nextSongArtist = songs[cardIndex].children[2].children[0].children[1].textContent;
-
                     currentSongImg.src = nextSongImg;
                     currentSongTitle.textContent = nextSongTitle;
                     currentSongArtist.textContent = nextSongArtist;
                     currentSongAudio.src = nextAudio.src;
-
                     currentSongAudio.play()
                     seek(currentSongAudio);
                 }
             })
-
             prevBtn.addEventListener('click', function () {
                 if (cardFlag) {
                     if (shuffleBtnFlag) {
                         cardIndex = Math.floor(Math.random() * songs.length);
                     }
-
                     if (cardIndex < 1) {
                         cardIndex = songs.length;
                     }
-
                     cardIndex--;
                     let nextAudio = songs[cardIndex].children[2];
                     nextAudio.currentTime = 0;
-
                     let nextSongImg = songs[cardIndex].children[0].children[0].src;
                     let nextSongTitle = songs[cardIndex].children[2].children[0].children[0].textContent;
                     let nextSongArtist = songs[cardIndex].children[2].children[0].children[1].textContent;
-
                     currentSongImg.src = nextSongImg;
                     currentSongTitle.textContent = nextSongTitle;
                     currentSongArtist.textContent = nextSongArtist;
                     currentSongAudio.src = nextAudio.src;
-
-                    currentSongAudio.play()
+                    currentSongAudio.play();
                     seek(currentSongAudio);
                 }
             })
         })
     })
-
+    //
     let likeIcons = document.querySelectorAll('.heart-icon');
     likeIcons.forEach(function (likeIcon) {
         let playlistBg = likeIcon.parentElement.previousElementSibling.children[0].children[0].src;
         let playlistName = likeIcon.parentElement.previousElementSibling.children[1].children[0].textContent;
         let playlistInfo = likeIcon.parentElement.previousElementSibling.children[1].children[1].textContent;
-
         let likeIconFlag = false;
-
+        //
         let key = localStorage.getItem(JSON.stringify(playlistBg.trim()));
         if (key) {
             likeIcon.style.color = 'red';
             likeIconFlag = true;
         }
-
+        //
         likeIcon.addEventListener('click', function () {
             let playlist = {
                 backgroundImg: playlistBg,
                 name: playlistName,
                 info: playlistInfo
             }
-
             if (!likeIconFlag) {
                 likeIcon.style.color = 'red';
                 localStorage.setItem(JSON.stringify(playlistBg.trim()), JSON.stringify(playlist));
@@ -374,7 +337,6 @@ fetchPlaylistApi();
 async function fetchApi() {
     const response = await fetch('https://musica-api.up.railway.app/new');
     const data = await response.json();
-
     const popularInYourAreaContainer = document.querySelector('.popular .songs-container');
     data.forEach(function (track) {
         popularInYourAreaContainer.innerHTML += `<div class="song">
@@ -391,7 +353,6 @@ async function fetchApi() {
         <span>${track.id}</span>
     </div>`
     })
-
     let popularSongs = popularInYourAreaContainer.querySelectorAll('.song');
     popularSongs.forEach(function name(popularSong) {
         let audio = popularSong.querySelector('audio');
@@ -401,7 +362,7 @@ async function fetchApi() {
             cardFlag = false;
             songFlag = false;
             audio.currentTime = 0;
-
+            //
             document.addEventListener('play', function (e) {
                 let audios = document.querySelectorAll('audio');
                 audios.forEach(function (audio) {
@@ -410,83 +371,66 @@ async function fetchApi() {
                     }
                 })
             }, true)
-
+            //
             currentSongBar.classList.add('display-current-song');
-
             let songImg = popularSong.children[0].src
             let songTitle = popularSong.children[1].children[0].textContent;
             let songArtist = popularSong.children[1].children[1].textContent;
-
             currentSongImg.src = songImg;
             currentSongTitle.textContent = songTitle;
             currentSongArtist.textContent = songArtist;
             currentSongAudio.src = audio.src;
-
-            currentSongAudio.play()
+            currentSongAudio.play();
             playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl fa-beat" style="--fa-animation-duration: 2s;"></i>';
             seek(currentSongAudio);
         })
     })
-
     nextBtn.addEventListener('click', function () {
         if (popularSongFlag) {
             if (shuffleBtnFlag) {
                 popularSongIndex = Math.floor(Math.random() * popularSongs.length);
             }
-
             if (popularSongIndex == popularSongs.length - 1) {
                 popularSongIndex = -1;
             }
-
             popularSongIndex++;
             let nextAudio = popularSongs[popularSongIndex].children[2];
             nextAudio.currentTime = 0;
-
             let nextSongImg = popularSongs[popularSongIndex].children[0].src;
             let nextSongTitle = popularSongs[popularSongIndex].children[1].children[0].textContent;
             let nextSongArtist = popularSongs[popularSongIndex].children[1].children[1].textContent;
-
             currentSongImg.src = nextSongImg;
             currentSongTitle.textContent = nextSongTitle;
             currentSongArtist.textContent = nextSongArtist;
             currentSongAudio.src = nextAudio.src;
-
-            currentSongAudio.play()
+            currentSongAudio.play();
             seek(currentSongAudio);
         }
     })
-
     prevBtn.addEventListener('click', function () {
         if (popularSongFlag) {
             if (shuffleBtnFlag) {
                 popularSongIndex = Math.floor(Math.random() * popularSongs.length);
             }
-
             if (popularSongIndex < 1) {
                 popularSongIndex = popularSongs.length;
             }
-
             popularSongIndex--;
             let nextAudio = popularSongs[popularSongIndex].children[2];
             nextAudio.currentTime = 0;
-
             let nextSongImg = popularSongs[popularSongIndex].children[0].src;
             let nextSongTitle = popularSongs[popularSongIndex].children[1].children[0].textContent;
             let nextSongArtist = popularSongs[popularSongIndex].children[1].children[1].textContent;
-
             currentSongImg.src = nextSongImg;
             currentSongTitle.textContent = nextSongTitle;
             currentSongArtist.textContent = nextSongArtist;
             currentSongAudio.src = nextAudio.src;
-
-            currentSongAudio.play()
+            currentSongAudio.play();
             seek(currentSongAudio);
         }
     })
 }
 fetchApi();
-//
-//
 //
 const newReleasesTracks = [
     {
@@ -539,7 +483,6 @@ const newReleasesTracks = [
         artist: 'Drake'
     }
 ]
-
 const newReleasesContainer = document.querySelector('.songs-container');
 newReleasesTracks.forEach(function (track) {
     newReleasesContainer.innerHTML += `<div class="song">
@@ -556,7 +499,6 @@ newReleasesTracks.forEach(function (track) {
     <span>${track.id}</span>
     </div>`
 })
-
 let newReleasesSongs = document.querySelectorAll('.song');
 newReleasesSongs.forEach(function (song) {
     let audio = song.querySelector('audio');
@@ -566,7 +508,7 @@ newReleasesSongs.forEach(function (song) {
         cardFlag = false;
         popularSongFlag = false;
         audio.currentTime = 0;
-
+        //
         document.addEventListener('play', function (e) {
             let audios = document.querySelectorAll('audio');
             audios.forEach(function (audio) {
@@ -575,25 +517,20 @@ newReleasesSongs.forEach(function (song) {
                 }
             })
         }, true)
-
+        //
         currentSongBar.classList.add('display-current-song');
-
         let songImg = song.children[0].src;
         let songTitle = song.children[1].children[0].textContent;
         let songArtist = song.children[1].children[1].textContent;
-
         currentSongImg.src = songImg;
         currentSongTitle.textContent = songTitle;
         currentSongArtist.textContent = songArtist;
         currentSongAudio.src = audio.src;
-
         currentSongAudio.play()
         playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl fa-beat" style="--fa-animation-duration: 2s;"></i>';
         seek(currentSongAudio);
     })
 })
-//
-//
 //
 playOrPauseBtn.addEventListener('click', function () {
     if (currentSongAudio.paused) {
@@ -606,67 +543,52 @@ playOrPauseBtn.addEventListener('click', function () {
     }
 })
 //
-//
-//
 nextBtn.addEventListener('click', function () {
     if (songFlag) {
         if (shuffleBtnFlag) {
             songIndex = Math.floor(Math.random() * newReleasesSongs.length);
         }
-
         if (songIndex == newReleasesSongs.length - 1) {
             songIndex = -1;
         }
-
         songIndex++;
         let nextAudio = newReleasesSongs[songIndex].children[2];
         nextAudio.currentTime = 0;
-
         let nextSongImg = newReleasesSongs[songIndex].children[0].src;
         let nextSongTitle = newReleasesSongs[songIndex].children[1].children[0].textContent;
         let nextSongArtist = newReleasesSongs[songIndex].children[1].children[1].textContent;
-
         currentSongImg.src = nextSongImg;
         currentSongTitle.textContent = nextSongTitle;
         currentSongArtist.textContent = nextSongArtist;
         currentSongAudio.src = nextAudio.src;
-
         currentSongAudio.play()
         seek(currentSongAudio);
     }
     playOrPauseBtn.innerHTML = `<i class="fa-solid fa-circle-pause fa-2xl fa-beat" style="--fa-animation-duration: 2s;"></i>`
 })
-
 prevBtn.addEventListener('click', function () {
     if (songFlag) {
         if (shuffleBtnFlag) {
             songIndex = Math.floor(Math.random() * newReleasesSongs.length);
         }
-
         if (songIndex < 1) {
             songIndex = newReleasesSongs.length;
         }
-
         songIndex--;
         let prevAudio = newReleasesSongs[songIndex].children[2];
         prevAudio.currentTime = 0;
-
         let prevSongImg = newReleasesSongs[songIndex].children[0].src;
         let prevSongTitle = newReleasesSongs[songIndex].children[1].children[0].textContent;
         let prevSongArtist = newReleasesSongs[songIndex].children[1].children[1].textContent;
-
         currentSongImg.src = prevSongImg;
         currentSongTitle.textContent = prevSongTitle;
         currentSongArtist.textContent = prevSongArtist;
         currentSongAudio.src = prevAudio.src;
-
         currentSongAudio.play()
         seek(currentSongAudio);
     }
     playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl fa-beat" style="--fa-animation-duration: 2s;"></i>';
 })
-//
-//
 //
 let shuffleBtnFlag = false;
 shuffleBtn.addEventListener('click', () => {
@@ -692,8 +614,6 @@ repeatBtn.addEventListener('click', () => {
     }
 })
 //
-//
-//
 const progressBar = currentSongBar.querySelector('.progress-bar').children[0];
 function seek(currentSongAudio) {
     currentSongAudio.addEventListener('timeupdate', function () {
@@ -709,13 +629,10 @@ function seek(currentSongAudio) {
             playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-play fa-2xl"></i>';
         }
     })
-
     progressBar.addEventListener('change', function () {
         currentSongAudio.currentTime = progressBar.value * currentSongAudio.duration / 100;
     })
 }
-//
-//
 //
 const volumeBar = currentSongBar.querySelector('.volume-bar').children[0];
 let volumeIcon = currentSongBar.querySelector('.volume-icon');

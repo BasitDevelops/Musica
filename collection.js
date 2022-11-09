@@ -3,12 +3,11 @@ const toggleBtn = document.querySelector('.toggle-btn-container');
 const sideMenu = document.querySelector('.side-menu');
 const searchBtn = document.querySelector('.search-icon-container');
 const searchBar = document.querySelector('.search-bar');
-
 let sideMenuFlag = false;
 let searchBarFlag = false;
 let navHeight = `${navBar.getBoundingClientRect().height}px`
 const body = document.body;
-
+//
 toggleBtn.addEventListener('click', function () {
     if (!sideMenuFlag) {
         sideMenuFlag = true;
@@ -26,7 +25,6 @@ toggleBtn.addEventListener('click', function () {
         body.style.height = '';
     }
 })
-
 searchBtn.addEventListener('click', function () {
     if (!searchBarFlag) {
         searchBarFlag = true;
@@ -38,16 +36,12 @@ searchBtn.addEventListener('click', function () {
     }
 })
 //
-//
-//
 if (window.location.href == 'http://127.0.0.1:5500/collection.html' || window.location.href == 'https://basitdevelops.github.io/Musica/collection.html') {
     let collectionLinkIcon = sideMenu.children[0].children[1].children[0].children[0];
     let collectionLinkText = sideMenu.children[0].children[1].children[0].children[1];
     collectionLinkIcon.classList.add('active-link-icon')
     collectionLinkText.classList.add('active-link-text')
 }
-//
-//
 //
 const currentSongBar = document.querySelector('.current-song');
 const playOrPauseBtn = currentSongBar.querySelector('.playorpause-btn');
@@ -60,23 +54,17 @@ let currentSongTitle = currentSongBar.children[0].children[1].children[0];
 let currentSongArtist = currentSongBar.children[0].children[1].children[1];
 let currentSongAudio = currentSongBar.children[0].children[2];
 //
-//
-//
 const myCollectionContainer = document.querySelector('#my-collection');
-
 const getAllPlaylists = JSON.parse(localStorage.getItem('allPlaylists'));
-
 const likedPlaylistsCards = [];
-
+//
 getAllPlaylists.forEach(function (playlist) {
     let likedPlaylists = JSON.parse(localStorage.getItem(JSON.stringify(playlist.cover)));
-
     if (likedPlaylists == null) {
         likedPlaylists = '';
     }
     likedPlaylistsCards.push(likedPlaylists);
 })
-
 likedPlaylistsCards.forEach(function (likedPlaylist) {
     myCollectionContainer.innerHTML += `<div class="card" id="liked-card">
     <p class="card-title">${likedPlaylist.name}</p>
@@ -93,7 +81,6 @@ likedPlaylistsCards.forEach(function (likedPlaylist) {
     <span class="bg-img">${likedPlaylist.backgroundImg}</span>
 </div>`
 })
-
 let likedCards = document.querySelectorAll('#liked-card');
 likedCards.forEach(function (card) {
     let backgroundImg = card.querySelector('.bg-img').textContent;
@@ -102,7 +89,6 @@ likedCards.forEach(function (card) {
     if (cardTitle.textContent == 'undefined') {
         card.style.display = 'none';
     }
-
     let playBtns = card.querySelectorAll('.play-btn');
     playBtns.forEach(function (playBtn) {
         let playlistCover = backgroundImg;
@@ -110,7 +96,6 @@ likedCards.forEach(function (card) {
         let playlistInfo = card.querySelector('.artist').textContent;
         let playlistFiles = JSON.parse(localStorage.getItem(JSON.stringify(playlistTitle.trim())));
         playlistFlag = false;
-
         playBtn.addEventListener('click', function () {
             playlistFlag = true;
             let element = document.createElement('div');
@@ -167,14 +152,12 @@ likedCards.forEach(function (card) {
             <div class="songs-container">
             </div>
             <i class="fa-solid fa-xmark fa-2x close-playlist"></i>`
-
             card.parentElement.appendChild(element)
             element.style.backgroundImage = `url(${playlistCover})`;
             let songsContainer = card.parentElement.querySelector('.songs-container');
             body.style.overflowY = 'hidden';
             body.style.height = '100vh';
             element.style.top = `${window.scrollY}px`;
-
             let closePlaylistIcon = element.querySelector('.close-playlist');
             closePlaylistIcon.addEventListener('click', function () {
                 if (playlistFlag) {
@@ -184,29 +167,23 @@ likedCards.forEach(function (card) {
                 }
             })
             //
-            //
-            //
             const addToCollectionBtn = element.querySelector('.add-to-collection-btn');
             let song = addToCollectionBtn.parentElement.parentElement.parentElement.parentElement;
             let playlistBg = song.children[0].children[0].children[0].src;
             let playlistName = song.children[0].children[1].children[0].textContent;
             let playlistDetails = song.children[0].children[01].children[1].textContent;
-
             let key = localStorage.getItem(JSON.stringify(playlistBg.trim()));
             if (key) {
                 addToCollectionBtn.children[1].textContent = 'Remove from collection';
-
             } else {
                 addToCollectionBtn.children[1].textContent = 'Add to collection';
             }
-
             addToCollectionBtn.addEventListener('click', function () {
                 let playlist = {
                     backgroundImg: playlistBg,
                     name: playlistName,
                     info: playlistDetails
                 }
-
                 if (!key) {
                     addToCollectionBtn.children[1].textContent = 'Remove from collection';
                     alert('This playlist has been added to your collection');
@@ -220,8 +197,6 @@ likedCards.forEach(function (card) {
                     location.reload();
                 }
             })
-            //
-            //
             //
             playlistFiles.forEach(function (file) {
                 songsContainer.innerHTML += `
@@ -248,7 +223,7 @@ likedCards.forEach(function (card) {
                     <span>${file.id}</span>
                 </div>`
             })
-
+            //
             let songs = card.parentElement.querySelectorAll('.song');
             songs.forEach(function (song) {
                 let audio = song.querySelector('audio')
@@ -268,48 +243,37 @@ likedCards.forEach(function (card) {
                             }
                         })
                     }, true)
-
                     currentSongBar.classList.add('display-current-song');
-
                     let songImg = song.children[0].children[0].src;
                     let songTitle = song.children[2].children[0].children[0].textContent;
                     let songArtist = song.children[2].children[0].children[1].textContent;
-
                     currentSongImg.src = songImg;
                     currentSongTitle.textContent = songTitle;
                     currentSongArtist.textContent = songArtist;
                     currentSongAudio.src = audio.src;
-
                     currentSongAudio.play();
                     playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl fa-beat" style="--fa-animation-duration: 2s;"></i>';
                     seek(currentSongAudio);
                 })
             })
-
             nextBtn.addEventListener('click', function () {
                 if (cardFlag) {
                     if (shuffleBtnFlag) {
                         cardIndex = Math.floor(Math.random() * songs.length);
                     }
-
                     if (cardIndex == songs.length - 1) {
                         cardIndex = -1;
                     }
-
                     cardIndex++;
                     let nextAudio = songs[cardIndex].children[3];
                     nextAudio.currentTime = 0;
-
-
                     let nextSongImg = songs[cardIndex].children[0].children[0].src;
                     let nextSongTitle = songs[cardIndex].children[2].children[0].children[0].textContent;
                     let nextSongArtist = songs[cardIndex].children[2].children[0].children[1].textContent;
-
                     currentSongImg.src = nextSongImg;
                     currentSongTitle.textContent = nextSongTitle;
                     currentSongArtist.textContent = nextSongArtist;
                     currentSongAudio.src = nextAudio.src;
-
                     currentSongAudio.play();
                     seek(currentSongAudio);
                 }
@@ -320,24 +284,19 @@ likedCards.forEach(function (card) {
                     if (shuffleBtnFlag) {
                         cardIndex = Math.floor(Math.random() * songs.length);
                     }
-
                     if (cardIndex < 1) {
                         cardIndex = songs.length;
                     }
-
                     cardIndex--;
                     let nextAudio = songs[cardIndex].children[2];
                     nextAudio.currentTime = 0;
-
                     let nextSongImg = songs[cardIndex].children[0].children[0].src;
                     let nextSongTitle = songs[cardIndex].children[2].children[0].children[0].textContent;
                     let nextSongArtist = songs[cardIndex].children[2].children[0].children[1].textContent;
-
                     currentSongImg.src = nextSongImg;
                     currentSongTitle.textContent = nextSongTitle;
                     currentSongArtist.textContent = nextSongArtist;
                     currentSongAudio.src = nextAudio.src;
-
                     currentSongAudio.play();
                     seek(currentSongAudio);
                 }
@@ -345,7 +304,7 @@ likedCards.forEach(function (card) {
         })
     })
 })
-
+//
 playOrPauseBtn.addEventListener('click', function () {
     if (currentSongAudio.paused) {
         currentSongAudio.play();
@@ -357,10 +316,7 @@ playOrPauseBtn.addEventListener('click', function () {
     }
 })
 //
-//
-//
 let shuffleBtnFlag = false;
-
 shuffleBtn.addEventListener('click', () => {
     let shuffleBtnIcon = shuffleBtn.children[0];
     if (!shuffleBtnFlag) {
@@ -372,10 +328,7 @@ shuffleBtn.addEventListener('click', () => {
     }
 })
 //
-//
-//
 let repeatBtnFlag = false;
-
 repeatBtn.addEventListener('click', () => {
     let repeatBtnIcon = repeatBtn.children[0];
     if (!repeatBtnFlag) {
@@ -387,10 +340,7 @@ repeatBtn.addEventListener('click', () => {
     }
 })
 //
-//
-//
 const progressBar = currentSongBar.querySelector('.progress-bar').children[0];
-
 function seek(currentSongAudio) {
     currentSongAudio.addEventListener('timeupdate', function () {
         progress = parseInt((currentSongAudio.currentTime / currentSongAudio.duration) * 100);
@@ -405,17 +355,14 @@ function seek(currentSongAudio) {
             playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-play fa-2xl"></i>';
         }
     })
-
     progressBar.addEventListener('change', function () {
         currentSongAudio.currentTime = progressBar.value * currentSongAudio.duration / 100;
     })
 }
 //
-//
-//
 const volumeBar = currentSongBar.querySelector('.volume-bar').children[0];
 let volumeIcon = currentSongBar.querySelector('.volume-icon');
-volumeBar.addEventListener('change', function() {
+volumeBar.addEventListener('change', function () {
     currentSongAudio.volume = volumeBar.value / 100;
     if (currentSongAudio.volume == 0) {
         volumeIcon.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
