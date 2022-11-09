@@ -6,7 +6,7 @@ const searchBar = document.querySelector('.search-bar');
 
 let sideMenuFlag = false;
 let searchBarFlag = false;
-let navHeight = `${navBar.getBoundingClientRect().height}px`
+let navHeight = `${navBar.getBoundingClientRect().height}px`;
 const body = document.body;
 
 toggleBtn.addEventListener('click', function () {
@@ -19,7 +19,7 @@ toggleBtn.addEventListener('click', function () {
     } else {
         sideMenuFlag = false;
         sideMenu.classList.remove('display-side-menu');
-        toggleBtn.innerHTML = '<i class="fa-solid fa-equals lg"></i>'
+        toggleBtn.innerHTML = '<i class="fa-solid fa-equals lg"></i>';
         body.style.overflowY = 'scroll';
     }
 })
@@ -29,29 +29,22 @@ searchBtn.addEventListener('click', function () {
         searchBarFlag = true;
         searchBar.style.top = navHeight;
         searchBar.classList.add('display-search-bar');
-        body.style.overflowY = 'hidden';
     } else {
         searchBarFlag = false;
         searchBar.classList.remove('display-search-bar');
-        body.style.overflowY = 'scroll';
     }
 })
 //
-
 //
-
 //
 if (window.location.href == 'http://127.0.0.1:5500/index.html' || window.location.href == 'https://basitdevelops.github.io/Musica/index.html' || window.location.href == 'https://basitdevelops.github.io/Musica/') {
     let homeLinkIcon = sideMenu.children[0].children[0].children[0].children[0];
     let homeLinkText = sideMenu.children[0].children[0].children[0].children[1];
-    homeLinkIcon.classList.add('active-link-icon')
-    homeLinkText.classList.add('active-link-text')
+    homeLinkIcon.classList.add('active-link-icon');
+    homeLinkText.classList.add('active-link-text');
 }
-
 //
-
 //
-
 //
 const currentSongBar = document.querySelector('.current-song');
 const playOrPauseBtn = currentSongBar.querySelector('.playorpause-btn');
@@ -64,59 +57,13 @@ let currentSongTitle = currentSongBar.children[0].children[1].children[0];
 let currentSongArtist = currentSongBar.children[0].children[1].children[1];
 let currentSongAudio = currentSongBar.children[0].children[2];
 //
-
 //
-
 //
-// const topChartsTracks = [
-//     {
-//         id: 1,
-//         src: './songs/50 Cent - In Da Club.mp3',
-//         coverArt: './images/50 cent in da club.jpg',
-//         name: 'In Da Club',
-//         artist: '50 Cent'
-//     },
-//     {
-//         id: 2,
-//         src: './songs/Ed Sheeran - Shape of You.mp3',
-//         coverArt: './images/ed sheeran shape of you.jpg',
-//         name: 'Shape of You',
-//         artist: 'Ed Sheeran'
-//     },
-//     {
-//         id: 3,
-//         src: './songs/Katy Perry - Dark Horse ft. Juicy J.mp3',
-//         coverArt: './images/katy perry dark horse.jpg',
-//         name: 'Dark Horse',
-//         artist: 'Katy Perry ft. Juicy J'
-//     },
-//     {
-//         id: 4,
-//         src: './songs/Kaya Stewart - If Things Go South.mp3',
-//         coverArt: './images/kaya stewart if things go south.jpg',
-//         name: 'If Things Go South',
-//         artist: 'Kaya Stewart'
-//     },
-//     {
-//         id: 5,
-//         src: './songs/Mark Ronson - Uptown Funk ft. Bruno Mars.mp3',
-//         coverArt: './images/mark ronson uptown funk.jpg',
-//         name: 'Uptown Funk',
-//         artist: 'Mark Ronson ft. Bruno Mars'
-//     }
-// ]
-
-// localStorage.setItem('topChartsTracks', JSON.stringify(topChartsTracks));
-
 const topChartsContainer = document.querySelector('.cards-container');
-
 async function fetchPlaylistApi() {
     const response = await fetch('https://musica-api.up.railway.app/playlist');
-
     const data = await response.json();
-
     localStorage.setItem('allPlaylists', JSON.stringify(data));
-
     data.forEach(function (playlist) {
         topChartsContainer.innerHTML += `<div class="card">
         <div class="first-container">
@@ -136,11 +83,10 @@ async function fetchPlaylistApi() {
         <i class="fa-solid fa-heart heart-icon"></i>
         </div> 
     </div>`
-        localStorage.setItem(JSON.stringify(playlist.title), JSON.stringify(playlist.files))
+        localStorage.setItem(JSON.stringify(playlist.title), JSON.stringify(playlist.files));
     })
 
     let topChartsCards = document.querySelectorAll('.card .first-container');
-
     topChartsCards.forEach(function (card) {
         let playlistCover = card.querySelector('img').src;
         let playlistTitle = card.querySelector('.card-title').textContent;
@@ -196,21 +142,22 @@ async function fetchPlaylistApi() {
                     </div>
                 </div>
             </div>
-            <div class="songs-container">
-                
-            </div>
+            <div class="songs-container"></div>
             <i class="fa-solid fa-xmark fa-2x close-playlist"></i>`
 
             card.parentElement.appendChild(element);
             element.style.backgroundImage = `url(${playlistCover})`;
             let songsContainer = card.parentElement.querySelector('.songs-container');
 
+            let x = window.matchMedia("(max-width: 960px)")
+            if (x.matches) {
+                window.scrollY = '0'
+            }
             body.style.overflowY = 'hidden';
             body.style.height = '100vh';
             element.style.top = `${window.scrollY}px`;
 
             let closePlaylistIcon = element.querySelector('.close-playlist');
-
             closePlaylistIcon.addEventListener('click', function () {
                 if (playlistFlag) {
                     card.parentElement.removeChild(element);
@@ -219,22 +166,16 @@ async function fetchPlaylistApi() {
                     body.style.height = '';
                 }
             })
-
             //
-
             //
-
             //
-
-            let addToCollectionBtn = element.querySelector('.add-to-collection-btn');
-
+            const addToCollectionBtn = element.querySelector('.add-to-collection-btn');
             let likeIcon = addToCollectionBtn.parentElement.parentElement.parentElement.parentElement.parentElement.children[1].children[0];
             let playlistBg = likeIcon.parentElement.previousElementSibling.children[0].children[0].src;
             let playlistName = likeIcon.parentElement.previousElementSibling.children[1].children[0].textContent;
             let playlistDetails = likeIcon.parentElement.previousElementSibling.children[1].children[1].textContent;
 
             let key = localStorage.getItem(JSON.stringify(playlistBg.trim()));
-
             if (key) {
                 addToCollectionBtn.children[1].textContent = 'Remove from collection';
                 likeIcon.style.color = 'red';
@@ -265,11 +206,8 @@ async function fetchPlaylistApi() {
                 }
             })
             //
-
             //
-
             //
-
             playlistFiles.forEach(function (file) {
                 songsContainer.innerHTML += `
                 <div class="song">
@@ -295,60 +233,18 @@ async function fetchPlaylistApi() {
                     <span>${file.id}</span>
                 </div>`
             })
-
+            //
+            //
+            //
             let songs = card.parentElement.querySelectorAll('.song');
-            //
-
-            //
-
-            //
-            let playAllBtn = element.querySelector('.play-all-btn');
-
-            // playAllBtn.addEventListener('click', function () {
-            //     let index = 0;
-            //     playAllFlag = true;
-
-            //     let audio = songs[index].querySelector('audio');
-
-            //     currentSongBar.classList.add('display-current-song');
-
-            //     let songImg = songs[index].children[0].children[0].src;
-            //     let songTitle = songs[index].children[2].children[0].children[0].textContent;
-            //     let songArtist = songs[index].children[2].children[0].children[1].textContent;
-
-            //     currentSongImg.src = songImg;
-            //     currentSongTitle.textContent = songTitle;
-            //     currentSongArtist.textContent = songArtist;
-            //     currentSongAudio.src = audio.src;
-
-            //     currentSongAudio.play();
-
-            //     playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>';
-
-            //     seek(currentSongAudio);
-            // })
-
-            //
-
-            //
-
-            //
-
             songs.forEach(function (song) {
-
-                //
-
-                //
-
-                //
                 let audio = song.querySelector('audio')
                 song.addEventListener('click', function () {
                     cardFlag = true;
                     let id = song.children[4].textContent;
-                    cardIndex = Number(id.substring(id.length, id.length - 1))
+                    cardIndex = Number(id.substring(id.length, id.length - 1));
                     songFlag = false;
                     popularSongFlag = false;
-
                     audio.currentTime = 0;
 
                     document.addEventListener('play', function (e) {
@@ -372,9 +268,7 @@ async function fetchPlaylistApi() {
                     currentSongAudio.src = audio.src;
 
                     currentSongAudio.play();
-
                     playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>';
-
                     seek(currentSongAudio);
                 })
             })
@@ -395,7 +289,6 @@ async function fetchPlaylistApi() {
                     console.log(nextAudio);
                     nextAudio.currentTime = 0;
 
-
                     let nextSongImg = songs[cardIndex].children[0].children[0].src;
                     let nextSongTitle = songs[cardIndex].children[2].children[0].children[0].textContent;
                     let nextSongArtist = songs[cardIndex].children[2].children[0].children[1].textContent;
@@ -406,7 +299,6 @@ async function fetchPlaylistApi() {
                     currentSongAudio.src = nextAudio.src;
 
                     currentSongAudio.play()
-
                     seek(currentSongAudio);
                 }
             })
@@ -435,7 +327,6 @@ async function fetchPlaylistApi() {
                     currentSongAudio.src = nextAudio.src;
 
                     currentSongAudio.play()
-
                     seek(currentSongAudio);
                 }
             })
@@ -443,7 +334,6 @@ async function fetchPlaylistApi() {
     })
 
     let likeIcons = document.querySelectorAll('.heart-icon');
-
     likeIcons.forEach(function (likeIcon) {
         let playlistBg = likeIcon.parentElement.previousElementSibling.children[0].children[0].src;
         let playlistName = likeIcon.parentElement.previousElementSibling.children[1].children[0].textContent;
@@ -452,7 +342,6 @@ async function fetchPlaylistApi() {
         let likeIconFlag = false;
 
         let key = localStorage.getItem(JSON.stringify(playlistBg.trim()));
-
         if (key) {
             likeIcon.style.color = 'red';
             likeIconFlag = true;
@@ -477,20 +366,15 @@ async function fetchPlaylistApi() {
         })
     })
 }
-
 fetchPlaylistApi();
 //
-
 //
-
 //
-
 async function fetchApi() {
     const response = await fetch('https://musica-api.up.railway.app/new');
     const data = await response.json();
 
     const popularInYourAreaContainer = document.querySelector('.popular .songs-container');
-
     data.forEach(function (track) {
         popularInYourAreaContainer.innerHTML += `<div class="song">
         <img src="${track.cover}" alt="">
@@ -508,7 +392,6 @@ async function fetchApi() {
     })
 
     let popularSongs = popularInYourAreaContainer.querySelectorAll('.song');
-
     popularSongs.forEach(function name(popularSong) {
         let audio = popularSong.querySelector('audio');
         popularSong.addEventListener('click', function () {
@@ -539,9 +422,7 @@ async function fetchApi() {
             currentSongAudio.src = audio.src;
 
             currentSongAudio.play()
-
             playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>';
-
             seek(currentSongAudio);
         })
     })
@@ -570,7 +451,6 @@ async function fetchApi() {
             currentSongAudio.src = nextAudio.src;
 
             currentSongAudio.play()
-
             seek(currentSongAudio);
         }
     })
@@ -599,60 +479,67 @@ async function fetchApi() {
             currentSongAudio.src = nextAudio.src;
 
             currentSongAudio.play()
-
             seek(currentSongAudio);
         }
     })
 }
-
 fetchApi();
-
 //
-
 //
-
 //
-
 const newReleasesTracks = [
     {
         id: 1,
-        src: './songs/Organic Soup (feat. Frank Leone).mp3',
-        coverArt: './images/casini organic soup.jpg',
-        name: 'Organic Soup',
-        artist: 'Casini feat. Frank Leone'
+        src: './songs/Timbaland - Apologize ft. OneRepublic.mp3',
+        coverArt: './images/apologize.jpeg',
+        name: 'Apologize',
+        artist: 'Timbaland ft. OneRepublic'
     },
     {
         id: 2,
-        src: './songs/Rema, Selena Gomez - Calm Down.mp3',
-        coverArt: './images/rema calm down.jpg',
-        name: 'Calm Down',
-        artist: 'Rema, Selena Gomez'
+        src: './songs/Cory Asbury - Reckless Love.mp3',
+        coverArt: './images/cory-asbury-reckless-love-scaled.jpeg',
+        name: 'Reckless Love',
+        artist: 'Cory Asbury'
     },
     {
         id: 3,
-        src: './songs/Shot Back.mp3',
-        coverArt: './images/young deion shot back.jpg',
-        name: 'Shot Back',
-        artist: 'Young Deion'
+        src: './songs/Billie Eilish - Ocean Eyes.mp3',
+        coverArt: './images/ocean eyes.jpeg',
+        name: 'Ocean Eyes',
+        artist: 'Billie Eilish'
     },
     {
         id: 4,
-        src: './songs/Tems - The Key.mp3',
-        coverArt: './images/tems key.jpg',
-        name: 'The Key',
-        artist: 'Tems'
+        src: './songs/Ed Sheeran - Way To Break My Heart feat. Skrillex.mp3',
+        coverArt: './images/way to break my heart.webp',
+        name: 'Way To Break My Heart',
+        artist: 'Ed Sheeran feat. Skrillex'
     },
     {
         id: 5,
-        src: './songs/Wiz Khalifa - See You Again ft. Charlie Puth.mp3',
-        coverArt: './images/wiz khalifa see you again.jpg',
-        name: 'See You Again',
-        artist: 'Wiz Khalifa ft. Charlie Puth'
+        src: './songs/Xtra Cool Boy Chase Refix).mp3',
+        coverArt: './images/xtra cool refix.jpeg',
+        name: 'Xtra Cool Refix',
+        artist: 'Boy Chase'
+    },
+    {
+        id: 6,
+        src: './songs/Young Jonn - Xtra Cool.mp3',
+        coverArt: './images/xtra cool.jpeg',
+        name: 'Xtra Cool',
+        artist: 'Young Jonn'
+    },
+    {
+        id: 7,
+        src: './songs/Drake - Nice For What.mp3',
+        coverArt: './images/nice for what.jpeg',
+        name: 'Nice For What',
+        artist: 'Drake'
     }
 ]
 
 const newReleasesContainer = document.querySelector('.songs-container');
-
 newReleasesTracks.forEach(function (track) {
     newReleasesContainer.innerHTML += `<div class="song">
     <img src="${track.coverArt}" alt="">
@@ -670,7 +557,6 @@ newReleasesTracks.forEach(function (track) {
 })
 
 let newReleasesSongs = document.querySelectorAll('.song');
-
 newReleasesSongs.forEach(function (song) {
     let audio = song.querySelector('audio');
     song.addEventListener('click', function () {
@@ -691,7 +577,7 @@ newReleasesSongs.forEach(function (song) {
 
         currentSongBar.classList.add('display-current-song');
 
-        let songImg = song.children[0].src
+        let songImg = song.children[0].src;
         let songTitle = song.children[1].children[0].textContent;
         let songArtist = song.children[1].children[1].textContent;
 
@@ -701,35 +587,26 @@ newReleasesSongs.forEach(function (song) {
         currentSongAudio.src = audio.src;
 
         currentSongAudio.play()
-
         playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>';
-
         seek(currentSongAudio);
     })
 })
 //
-
 //
-
 //
-
 playOrPauseBtn.addEventListener('click', function () {
     if (currentSongAudio.paused) {
         currentSongAudio.play();
-        playOrPauseBtn.innerHTML = `<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>`
+        playOrPauseBtn.innerHTML = `<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>`;
         seek(currentSongAudio);
     } else {
         currentSongAudio.pause();
-        playOrPauseBtn.innerHTML = `<i class="fa-solid fa-circle-play fa-2xl"></i>`
+        playOrPauseBtn.innerHTML = `<i class="fa-solid fa-circle-play fa-2xl"></i>`;
     }
 })
-
 //
-
 //
-
 //
-
 nextBtn.addEventListener('click', function () {
     if (songFlag) {
         if (shuffleBtnFlag) {
@@ -754,7 +631,6 @@ nextBtn.addEventListener('click', function () {
         currentSongAudio.src = nextAudio.src;
 
         currentSongAudio.play()
-
         seek(currentSongAudio);
     }
     playOrPauseBtn.innerHTML = `<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>`
@@ -784,18 +660,14 @@ prevBtn.addEventListener('click', function () {
         currentSongAudio.src = prevAudio.src;
 
         currentSongAudio.play()
-
         seek(currentSongAudio);
     }
     playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>';
 })
 //
-
 //
-
 //
 let shuffleBtnFlag = false;
-
 shuffleBtn.addEventListener('click', () => {
     let shuffleBtnIcon = shuffleBtn.children[0];
     if (!shuffleBtnFlag) {
@@ -807,10 +679,7 @@ shuffleBtn.addEventListener('click', () => {
     }
 })
 
-//
-
 let repeatBtnFlag = false;
-
 repeatBtn.addEventListener('click', () => {
     let repeatBtnIcon = repeatBtn.children[0];
     if (!repeatBtnFlag) {
@@ -822,13 +691,9 @@ repeatBtn.addEventListener('click', () => {
     }
 })
 //
-
 //
-
 //
-
 const progressBar = currentSongBar.querySelector('.progress-bar').children[0];
-
 function seek(currentSongAudio) {
     currentSongAudio.addEventListener('timeupdate', function () {
         progress = parseInt((currentSongAudio.currentTime / currentSongAudio.duration) * 100);
@@ -842,25 +707,9 @@ function seek(currentSongAudio) {
         if (currentSongAudio.currentTime == currentSongAudio.duration) {
             playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-play fa-2xl"></i>';
         }
-        // if (playAllFlag && currentSongAudio.currentTime == currentSongAudio.duration) {
-        //     playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl"></i>';
-        // }
     })
 
     progressBar.addEventListener('change', function () {
         currentSongAudio.currentTime = progressBar.value * currentSongAudio.duration / 100;
     })
 }
-//
-
-//
-
-//
-
-
-
-
-
-
-
-
