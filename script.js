@@ -13,14 +13,17 @@ toggleBtn.addEventListener('click', function () {
     if (!sideMenuFlag) {
         sideMenuFlag = true;
         sideMenu.style.top = navHeight;
+        sideMenu.style.height = '100vh';
         sideMenu.classList.add('display-side-menu');
         toggleBtn.innerHTML = '<i class="fa-solid fa-xmark lg"></i>';
         body.style.overflowY = 'hidden';
+        body.style.height = '100vh';
     } else {
         sideMenuFlag = false;
         sideMenu.classList.remove('display-side-menu');
         toggleBtn.innerHTML = '<i class="fa-solid fa-equals lg"></i>';
         body.style.overflowY = 'scroll';
+        body.style.height = '';
     }
 })
 
@@ -268,13 +271,12 @@ async function fetchPlaylistApi() {
                     currentSongAudio.src = audio.src;
 
                     currentSongAudio.play();
-                    playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>';
+                    playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl fa-beat" style="--fa-animation-duration: 2s;"></i>';
                     seek(currentSongAudio);
                 })
             })
 
             nextBtn.addEventListener('click', function () {
-                console.log(cardIndex);
                 if (cardFlag) {
                     if (shuffleBtnFlag) {
                         cardIndex = Math.floor(Math.random() * songs.length);
@@ -286,7 +288,6 @@ async function fetchPlaylistApi() {
 
                     cardIndex++;
                     let nextAudio = songs[cardIndex].children[3];
-                    console.log(nextAudio);
                     nextAudio.currentTime = 0;
 
                     let nextSongImg = songs[cardIndex].children[0].children[0].src;
@@ -422,7 +423,7 @@ async function fetchApi() {
             currentSongAudio.src = audio.src;
 
             currentSongAudio.play()
-            playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>';
+            playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl fa-beat" style="--fa-animation-duration: 2s;"></i>';
             seek(currentSongAudio);
         })
     })
@@ -587,7 +588,7 @@ newReleasesSongs.forEach(function (song) {
         currentSongAudio.src = audio.src;
 
         currentSongAudio.play()
-        playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>';
+        playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl fa-beat" style="--fa-animation-duration: 2s;"></i>';
         seek(currentSongAudio);
     })
 })
@@ -597,7 +598,7 @@ newReleasesSongs.forEach(function (song) {
 playOrPauseBtn.addEventListener('click', function () {
     if (currentSongAudio.paused) {
         currentSongAudio.play();
-        playOrPauseBtn.innerHTML = `<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>`;
+        playOrPauseBtn.innerHTML = `<i class="fa-solid fa-circle-pause fa-2xl fa-beat" style="--fa-animation-duration: 2s;"></i>`;
         seek(currentSongAudio);
     } else {
         currentSongAudio.pause();
@@ -633,7 +634,7 @@ nextBtn.addEventListener('click', function () {
         currentSongAudio.play()
         seek(currentSongAudio);
     }
-    playOrPauseBtn.innerHTML = `<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>`
+    playOrPauseBtn.innerHTML = `<i class="fa-solid fa-circle-pause fa-2xl fa-beat" style="--fa-animation-duration: 2s;"></i>`
 })
 
 prevBtn.addEventListener('click', function () {
@@ -662,7 +663,7 @@ prevBtn.addEventListener('click', function () {
         currentSongAudio.play()
         seek(currentSongAudio);
     }
-    playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl fa-beat"></i>';
+    playOrPauseBtn.innerHTML = '<i class="fa-solid fa-circle-pause fa-2xl fa-beat" style="--fa-animation-duration: 2s;"></i>';
 })
 //
 //
@@ -713,3 +714,18 @@ function seek(currentSongAudio) {
         currentSongAudio.currentTime = progressBar.value * currentSongAudio.duration / 100;
     })
 }
+//
+//
+//
+const volumeBar = currentSongBar.querySelector('.volume-bar').children[0];
+let volumeIcon = currentSongBar.querySelector('.volume-icon');
+volumeBar.addEventListener('change', function() {
+    currentSongAudio.volume = volumeBar.value / 100;
+    if (currentSongAudio.volume == 0) {
+        volumeIcon.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+    } else if (currentSongAudio.volume <= 0.5) {
+        volumeIcon.innerHTML = '<i class="fa-solid fa-volume-low"></i>';
+    } else {
+        volumeIcon.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+    }
+})

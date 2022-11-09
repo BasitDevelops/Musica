@@ -406,6 +406,7 @@ input[type="range"]::-webkit-slider-thumb {
     display: flex;
     align-items: center;
 }
+
 /* CURRENT SONG SECTION ENDS HERE */
 
 /* COLLECTION PAGE STARTS HERE */
@@ -626,6 +627,7 @@ input[type="range"]::-webkit-slider-thumb {
 
 /* UC PAGE STARTS HERE */
 .uc-page {
+    box-sizing: border-box;
     margin-top: 1rem;
     margin-left: 4.5rem;
     display: flex;
@@ -633,6 +635,7 @@ input[type="range"]::-webkit-slider-thumb {
     justify-content: center;
     align-items: center;
     gap: 1rem;
+    padding: 2.5rem;
 }
 
 .uc-page img {
@@ -662,6 +665,7 @@ input[type="range"]::-webkit-slider-thumb {
     background-color: #ef6637;
     color: #1e2224;
 }
+
 /* UC PAGE ENDS HERE */
 
 
@@ -798,6 +802,7 @@ input[type="range"]::-webkit-slider-thumb {
     .songs-container::-webkit-scrollbar {
         display: none;
     }
+
     /* HOME PAGE ENDS HERE */
 
     /* CURRENT SONG STARTS HERE */
@@ -823,6 +828,7 @@ input[type="range"]::-webkit-slider-thumb {
         gap: .5rem;
 
     }
+
     /* CURRENT SONG ENDS HERE */
 
     /* COLLECTION PAGE STARTS HERE */
@@ -891,6 +897,7 @@ input[type="range"]::-webkit-slider-thumb {
     .collection-page .card button {
         display: inherit;
     }
+
     /* COLLECTION PAGE ENDS HERE */
 
     /* PLAYLIST STARTS HERE */
@@ -945,10 +952,24 @@ input[type="range"]::-webkit-slider-thumb {
         display: flex !important;
         flex-direction: column-reverse;
     }
+
     /* PLAYLIST ENDS HERE */
+
+    /* UC PAGE STARTS HERE */
+    .uc-page {
+        margin: 0;
+        min-height: 100vh;
+    }
+
+    .uc-page img {
+        width: 20rem;
+        border-radius: 50%;
+    }
+    /* UC PAGE ENDS HERE */
 }
 
 @media screen and (max-width: 960px) and (min-width: 481px) {
+
     html,
     body {
         margin: 0;
@@ -988,6 +1009,7 @@ input[type="range"]::-webkit-slider-thumb {
     .display-search-bar {
         display: inherit;
     }
+
     /* NAVBAR ENDS HERE */
 
     /* SIDE MENU STARTS HERE */
@@ -1026,6 +1048,7 @@ input[type="range"]::-webkit-slider-thumb {
     .display-side-menu {
         display: inherit;
     }
+
     /* SIDE MENU ENDS HERE */
 
     /* HOME PAGE STARTS HERE */
@@ -1079,6 +1102,7 @@ input[type="range"]::-webkit-slider-thumb {
     .songs-container::-webkit-scrollbar {
         display: none;
     }
+
     /* HOME PAGE ENDS HERE */
 
     /* CURRENT SONG STARTS HERE */
@@ -1093,7 +1117,7 @@ input[type="range"]::-webkit-slider-thumb {
         width: 70%;
     }
 
-    .controls { 
+    .controls {
         margin-left: 5%;
         min-width: 25%;
         min-height: 2rem;
@@ -1103,6 +1127,7 @@ input[type="range"]::-webkit-slider-thumb {
     .controls .control-btns {
         gap: 1rem;
     }
+
     /* CURRENT SONG ENDS HERE */
 
     /* COLLECTION PAGE STARTS HERE */
@@ -1166,6 +1191,7 @@ input[type="range"]::-webkit-slider-thumb {
     .collection-page .card button {
         display: inherit;
     }
+
     /* COLLECTION PAGE ENDS HERE */
 
     /* PLAYLIST STARTS HERE */
@@ -1221,6 +1247,18 @@ input[type="range"]::-webkit-slider-thumb {
         flex-direction: column-reverse;
     }
     /* PLAYLIST ENDS HERE */
+
+     /* UC PAGE STARTS HERE */
+    .uc-page {
+        margin: 0;
+        min-height: 100vh;
+    }
+
+    .uc-page img {
+        width: 20rem;
+        border-radius: 50%;
+    }
+    /* UC PAGE ENDS HERE */
 }
 
 @media screen and (max-width: 1250px) and (min-width: 961px) {
