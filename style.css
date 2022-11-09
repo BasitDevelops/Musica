@@ -100,7 +100,6 @@ nav {
 .active-link-text {
     color: #FFFFFF;
 }
-
 /* SIDE MENU ENDS HERE  */
 
 /* HOME PAGE STARTS HERE  */
@@ -644,7 +643,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .uc-page h3 {
-    color: #ef6637;
+    color: #FACD66;
 }
 
 .uc-page .links {
@@ -655,14 +654,14 @@ input[type="range"]::-webkit-slider-thumb {
 
 .uc-page .links a {
     box-sizing: border-box;
-    border: 1.5px solid #ef6637;
+    border: 1.5px solid #FACD66;
     border-radius: .25rem;
-    color: #ef6637;
+    color: #FACD66;
     padding: .5rem;
 }
 
 .uc-page .links a:hover {
-    background-color: #ef6637;
+    background-color: #FACD66;
     color: #1e2224;
 }
 
@@ -958,6 +957,7 @@ input[type="range"]::-webkit-slider-thumb {
     /* UC PAGE STARTS HERE */
     .uc-page {
         margin: 0;
+        justify-content: flex-start;
         min-height: 100vh;
     }
 
@@ -1251,6 +1251,7 @@ input[type="range"]::-webkit-slider-thumb {
      /* UC PAGE STARTS HERE */
     .uc-page {
         margin: 0;
+        justify-content: flex-start;
         min-height: 100vh;
     }
 
