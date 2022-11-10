@@ -155,6 +155,11 @@ likedCards.forEach(function (card) {
             card.parentElement.appendChild(element)
             element.style.backgroundImage = `url(${playlistCover})`;
             let songsContainer = card.parentElement.querySelector('.songs-container');
+            //
+            let x = window.matchMedia("(max-width: 960px)")
+            if (x.matches) {
+                window.scrollY = '0'
+            }
             body.style.overflowY = 'hidden';
             body.style.height = '100vh';
             element.style.top = `${window.scrollY}px`;
@@ -164,6 +169,7 @@ likedCards.forEach(function (card) {
                     card.parentElement.removeChild(element)
                     playlistFlag = false;
                     body.style.overflowY = 'scroll';
+                    body.style.height = '';
                 }
             })
             //
